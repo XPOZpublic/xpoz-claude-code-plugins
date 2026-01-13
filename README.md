@@ -39,8 +39,8 @@ Transform Claude Code into a powerful brand intelligence platform. Analyze socia
 
 ```bash
 # Clone the repo
-git clone https://github.com/xpoz-ai/claude-code-brand-intelligence.git
-cd claude-code-brand-intelligence
+git clone https://github.com/hossenco/claude-skills-automation.git
+cd claude-skills-automation
 
 # Run the installer
 ./install.sh
@@ -219,7 +219,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## Support
 
 - **Documentation**: [xpoz.ai/docs](https://xpoz.ai/docs)
-- **Issues**: [GitHub Issues](https://github.com/xpoz-ai/claude-code-brand-intelligence/issues)
+- **Issues**: [GitHub Issues](https://github.com/hossenco/claude-skills-automation/issues)
 - **Discord**: [Join our community](https://discord.gg/xpoz)
 
 ---
