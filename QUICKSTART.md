@@ -2,18 +2,17 @@
 
 ## Installation
 
-**Option 1: Clone**
 ```bash
 git clone https://github.com/hossenco/claude-skills-automation.git
 cd claude-skills-automation
 ./install.sh
 ```
 
-**Option 2: Zip**
+## Update
+
 ```bash
-unzip claude-skills-automation.zip
-cd claude-code-brand-intelligence
-./install.sh
+cd claude-skills-automation
+git pull && ./install.sh
 ```
 
 ## Setup XPOZ MCP
