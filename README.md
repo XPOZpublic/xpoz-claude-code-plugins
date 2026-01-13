@@ -35,13 +35,13 @@ Transform Claude Code into a powerful brand intelligence platform. Analyze socia
 
 ### Installation
 
-#### Option 1: One-Line Install (Recommended)
+#### Option 1: Clone Repository (Recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/hossenco/claude-skills-automation/main/install-remote.sh | bash
+git clone https://github.com/hossenco/claude-skills-automation.git
+cd claude-skills-automation
+./install.sh
 ```
-
-That's it! The script downloads, extracts, and installs everything automatically.
 
 #### Option 2: From Zip File
 
@@ -50,19 +50,11 @@ That's it! The script downloads, extracts, and installs everything automatically
 
 ```bash
 unzip claude-skills-automation.zip
-cd claude-skills-automation-main
-./install.sh
-```
-
-#### Option 3: Clone Repository
-
-```bash
-git clone https://github.com/hossenco/claude-skills-automation.git
 cd claude-skills-automation
 ./install.sh
 ```
 
-#### Option 4: Manual Install
+#### Option 3: Manual Install
 
 1. **Copy skills to Claude Code:**
 
