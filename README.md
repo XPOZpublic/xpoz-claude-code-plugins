@@ -2,6 +2,8 @@
 
 > Powered by [XPOZ MCP Social Intelligence](https://xpoz.ai)
 
+## 🔗 [View Live Examples](https://xpozpublic.github.io/xpoz-claude-code-plugins/)
+
 Transform Claude Code into a powerful brand intelligence platform. Analyze social sentiment, discover influencers, and generate competitive insights using real-time Twitter/X data.
 
 ## Features
