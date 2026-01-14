@@ -23,6 +23,16 @@ Transform Claude Code into a powerful brand intelligence platform. Analyze socia
 - **Influencer Discovery**: Classifies by tier (Mega/Macro/Micro/Nano) and voice type
 - **Beautiful Reports**: Generates standalone HTML reports with dark theme
 
+## Example Reports
+
+See live examples in the [examples/](examples/) folder:
+
+| Report | Description |
+|--------|-------------|
+| [Tesla Brand Snapshot](examples/Tesla-snapshot-report.html) | Sentiment analysis, narratives, SWOT, influencers |
+| [Tesla Competition](examples/Tesla-competition-report.html) | Tesla vs Rivian, BYD, Lucid - share of voice, positioning |
+| [Tesla Influencers](examples/Tesla-influencers-report.html) | Influencer discovery, partnership opportunities |
+
 ## Quick Start
 
 ### Step 1: Set Up Your XPOZ Account (Required First!)
