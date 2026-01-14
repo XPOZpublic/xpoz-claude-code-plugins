@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Competitive Intelligence Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-header { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); }
+        .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+    <div class="max-w-6xl mx-auto p-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-4xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                    Tesla vs Rivian vs BYD vs Lucid
+                </h1>
+                <p class="text-slate-400 mt-2 text-lg">Competitive Intelligence Report • 7 Days • 17,386 Total Mentions</p>
+                <p class="text-slate-500 text-sm mt-1">January 7 - January 14, 2026</p>
+            </div>
+            <div class="flex gap-4">
+                <div class="text-center p-4 rounded-xl bg-indigo-500/20 ring-2 ring-indigo-500/50">
+                    <div class="text-4xl font-bold text-emerald-400">60</div>
+                    <div class="text-sm text-slate-400 mt-1">Tesla</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-slate-800">
+                    <div class="text-4xl font-bold text-yellow-400">52</div>
+                    <div class="text-sm text-slate-400 mt-1">Rivian</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-slate-800">
+                    <div class="text-4xl font-bold text-yellow-400">48</div>
+                    <div class="text-sm text-slate-400 mt-1">BYD</div>
+                </div>
+                <div class="text-center p-4 rounded-xl bg-slate-800">
+                    <div class="text-4xl font-bold text-yellow-400">45</div>
+                    <div class="text-sm text-slate-400 mt-1">Lucid</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Score Legend -->
+        <div class="bg-slate-800/50 rounded-lg px-4 py-2 mb-6 flex items-center gap-6 text-xs text-slate-400">
+            <span class="font-medium text-slate-300">Sentiment Scores (0-100):</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> 60+ Positive</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-yellow-400"></span> 40-59 Mixed</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-400"></span> &lt;40 Negative</span>
+            <span class="text-slate-500 ml-auto">Higher = more positive social sentiment</span>
+        </div>
+
+        <!-- Summary Card - IMPROVED with non-trivial insights -->
+        <div class="bg-gradient-to-r from-slate-800 to-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700">
+            <h2 class="text-2xl font-bold mb-3">Tesla Dominates 84% Share of Voice as Competitors Struggle for Visibility</h2>
+            <p class="text-slate-300 text-lg mb-4">Tesla commands 84% of all EV conversation with 14,603 mentions, leaving competitors fighting for the remaining 16%. Rivian leads among challengers with 7.5% share and the highest competitor sentiment (52), while Lucid (45) trails with mounting skepticism despite strong Gravity SUV buzz at CES.</p>
+            <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-indigo-500">
+                <p class="text-sm text-slate-400 mb-1"><strong class="text-slate-300">Analyst View:</strong></p>
+                <p class="text-slate-300">The 7-point sentiment gap between Rivian (52) and Lucid (45) reflects contrasting narratives: Rivian's Piper Sandler price target raise to $20 vs. Lucid's "good news, bad stock" pattern with Morgan Stanley shorting. BYD (48) dominates global sales discussion but faces profitability scrutiny — generating just $2K profit per car vs Tesla's $6K. Tesla's SpaceX merger speculation (3,310 likes) drives bullish sentiment that competitors can't match.</p>
+            </div>
+        </div>
+
+        <!-- Volume of Mentions Chart -->
+        <div class="bg-slate-800 rounded-xl p-6 mb-8">
+            <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+                Volume of Mentions (7 Days)
+            </h3>
+            <div class="h-64">
+                <canvas id="volumeChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Share of Voice & Sentiment Comparison -->
+        <div class="grid grid-cols-2 gap-8 mb-8">
+            <!-- Share of Voice -->
+            <div class="bg-slate-800 rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-white mb-6">Share of Voice</h3>
+                <div class="h-56 flex items-center justify-center">
+                    <canvas id="sovChart"></canvas>
+                </div>
+                <div class="flex justify-center gap-4 mt-4 flex-wrap">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-indigo-500"></div>
+                        <span class="text-slate-300 text-sm">Tesla 84.0%</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                        <span class="text-slate-300 text-sm">Rivian 7.5%</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                        <span class="text-slate-300 text-sm">Lucid 5.0%</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                        <span class="text-slate-300 text-sm">BYD 3.5%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentiment Comparison with 5-level breakdown -->
+            <div class="bg-slate-800 rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-white mb-6">Sentiment Comparison</h3>
+                <div class="space-y-5">
+                    <!-- Tesla -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-indigo-400">Tesla</span>
+                            <span class="text-xl font-bold text-emerald-400">60</span>
+                        </div>
+                        <div class="h-3 bg-slate-700 rounded-full overflow-hidden flex">
+                            <div class="bg-emerald-500" style="width: 32%"></div>
+                            <div class="bg-emerald-300" style="width: 18%"></div>
+                            <div class="bg-gray-500" style="width: 28%"></div>
+                            <div class="bg-amber-400" style="width: 12%"></div>
+                            <div class="bg-red-500" style="width: 10%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 mt-1">
+                            <span class="text-emerald-400">32% pos</span>
+                            <span>18% lean+</span>
+                            <span>28% neut</span>
+                            <span>12% lean-</span>
+                            <span class="text-red-400">10% neg</span>
+                        </div>
+                    </div>
+                    <!-- Rivian -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-amber-400">Rivian</span>
+                            <span class="text-xl font-bold text-yellow-400">52</span>
+                        </div>
+                        <div class="h-3 bg-slate-700 rounded-full overflow-hidden flex">
+                            <div class="bg-emerald-500" style="width: 18%"></div>
+                            <div class="bg-emerald-300" style="width: 16%"></div>
+                            <div class="bg-gray-500" style="width: 35%"></div>
+                            <div class="bg-amber-400" style="width: 15%"></div>
+                            <div class="bg-red-500" style="width: 16%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 mt-1">
+                            <span class="text-emerald-400">18% pos</span>
+                            <span>16% lean+</span>
+                            <span>35% neut</span>
+                            <span>15% lean-</span>
+                            <span class="text-red-400">16% neg</span>
+                        </div>
+                    </div>
+                    <!-- BYD -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-rose-400">BYD</span>
+                            <span class="text-xl font-bold text-yellow-400">48</span>
+                        </div>
+                        <div class="h-3 bg-slate-700 rounded-full overflow-hidden flex">
+                            <div class="bg-emerald-500" style="width: 25%"></div>
+                            <div class="bg-emerald-300" style="width: 13%"></div>
+                            <div class="bg-gray-500" style="width: 30%"></div>
+                            <div class="bg-amber-400" style="width: 18%"></div>
+                            <div class="bg-red-500" style="width: 14%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 mt-1">
+                            <span class="text-emerald-400">25% pos</span>
+                            <span>13% lean+</span>
+                            <span>30% neut</span>
+                            <span>18% lean-</span>
+                            <span class="text-red-400">14% neg</span>
+                        </div>
+                    </div>
+                    <!-- Lucid -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-emerald-400">Lucid</span>
+                            <span class="text-xl font-bold text-yellow-400">45</span>
+                        </div>
+                        <div class="h-3 bg-slate-700 rounded-full overflow-hidden flex">
+                            <div class="bg-emerald-500" style="width: 22%"></div>
+                            <div class="bg-emerald-300" style="width: 12%"></div>
+                            <div class="bg-gray-500" style="width: 28%"></div>
+                            <div class="bg-amber-400" style="width: 20%"></div>
+                            <div class="bg-red-500" style="width: 18%"></div>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500 mt-1">
+                            <span class="text-emerald-400">22% pos</span>
+                            <span>12% lean+</span>
+                            <span>28% neut</span>
+                            <span>20% lean-</span>
+                            <span class="text-red-400">18% neg</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Deep-Dive Cards -->
+        <h3 class="text-xl font-bold text-white mb-4">Company Deep-Dive</h3>
+        <div class="space-y-6 mb-8">
+            <!-- Tesla Card -->
+            <div class="bg-slate-800 rounded-xl p-6 ring-2 ring-indigo-500/50">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold bg-indigo-500/20 text-indigo-400">T</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Tesla</h3>
+                            <p class="text-slate-400">Primary Brand • 14,603 mentions</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-emerald-400">60 <span class="text-sm text-slate-500 font-normal">sentiment</span></div>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-indigo-500">
+                    <p class="text-slate-300 italic">"Tesla FSD in China is INSANE. I need more $TSLA stock." — @CuriousPejjy (2,115 likes)</p>
+                </div>
+            </div>
+
+            <!-- BYD Card -->
+            <div class="bg-slate-800 rounded-xl p-6">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold bg-rose-500/20 text-rose-400">B</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">BYD</h3>
+                            <p class="text-slate-400">Competitor • 539 mentions</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-yellow-400">55 <span class="text-sm text-slate-500 font-normal">sentiment</span></div>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-rose-500">
+                    <p class="text-slate-300 italic">"BYD outsold Tesla by over 600,000 electric vehicles in 2025. Final tally: BYD 2.25M EVs, Tesla 1.64M" — @curious_founder (670 retweets)</p>
+                </div>
+            </div>
+
+            <!-- Rivian Card -->
+            <div class="bg-slate-800 rounded-xl p-6">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold bg-amber-500/20 text-amber-400">R</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Rivian</h3>
+                            <p class="text-slate-400">Competitor • 1,289 mentions</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-yellow-400">52 <span class="text-sm text-slate-500 font-normal">sentiment</span></div>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-amber-500">
+                    <p class="text-slate-300 italic">"Rivian is getting very close to positive FCF. The inflection point is nearer than most think." — @MontanaMatos (34 likes)</p>
+                </div>
+            </div>
+
+            <!-- Lucid Card -->
+            <div class="bg-slate-800 rounded-xl p-6">
+                <div class="flex items-start justify-between mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold bg-emerald-500/20 text-emerald-400">L</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Lucid</h3>
+                            <p class="text-slate-400">Competitor • 1,306 mentions</p>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold text-yellow-400">48 <span class="text-sm text-slate-500 font-normal">sentiment</span></div>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-emerald-500">
+                    <p class="text-slate-300 italic">"Why is Morgan Stanley so desperately attacking Lucid? They are hysterical and biased due to their Tesla exposure since Tesla car sales are dropping." — @Stockwatch242</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strengths & Weaknesses Grid -->
+        <h3 class="text-xl font-bold text-white mb-4">Strengths & Weaknesses</h3>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <!-- Tesla S&W -->
+            <div class="bg-slate-800 rounded-xl overflow-hidden ring-2 ring-indigo-500/50">
+                <div class="p-3 border-b border-slate-700 bg-indigo-500/10">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-indigo-500/30 text-indigo-400">T</div>
+                        <span class="font-bold text-white">Tesla</span>
+                    </div>
+                </div>
+                <div class="p-3 border-b border-slate-700">
+                    <h4 class="flex items-center gap-2 text-emerald-400 font-medium mb-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        Strengths
+                    </h4>
+                    <ul class="space-y-1 text-xs">
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> FSD technology leadership</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Brand loyalty & community</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Profitable EV business</li>
+                    </ul>
+                </div>
+                <div class="p-3">
+                    <h4 class="flex items-center gap-2 text-red-400 font-medium mb-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Weaknesses
+                    </h4>
+                    <ul class="space-y-1 text-xs">
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> CEO distraction concerns</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> BYD volume pressure</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Robotaxi timeline unclear</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- BYD S&W -->
+            <div class="bg-slate-800 rounded-xl overflow-hidden">
+                <div class="p-3 border-b border-slate-700 bg-rose-500/10">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-rose-500/30 text-rose-400">B</div>
+                        <span class="font-bold text-white">BYD</span>
+                    </div>
+                </div>
+                <div class="p-3 border-b border-slate-700">
+                    <h4 class="flex items-center gap-2 text-emerald-400 font-medium mb-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        Strengths
+                    </h4>
+                    <ul class="space-y-1 text-xs">
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Global sales leader (2.25M)</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Vertical integration</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Price competitiveness</li>
+                    </ul>
+                </div>
+                <div class="p-3">
+                    <h4 class="flex items-center gap-2 text-red-400 font-medium mb-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Weaknesses
+                    </h4>
+                    <ul class="space-y-1 text-xs">
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Profit margin concerns</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> US market absence</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Debt levels rising</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Rivian S&W -->
+            <div class="bg-slate-800 rounded-xl overflow-hidden">
+                <div class="p-3 border-b border-slate-700 bg-amber-500/10">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-amber-500/30 text-amber-400">R</div>
+                        <span class="font-bold text-white">Rivian</span>
+                    </div>
+                </div>
+                <div class="p-3 border-b border-slate-700">
+                    <h4 class="flex items-center gap-2 text-emerald-400 font-medium mb-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        Strengths
+                    </h4>
+                    <ul class="space-y-1 text-xs">
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> VW partnership/funding</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> R2 anticipation</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Approaching FCF positive</li>
+                    </ul>
+                </div>
+                <div class="p-3">
+                    <h4 class="flex items-center gap-2 text-red-400 font-medium mb-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Weaknesses
+                    </h4>
+                    <ul class="space-y-1 text-xs">
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Recent recall (19,641 units)</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Deliveries down 18% YoY</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Cash burn rate</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Lucid S&W -->
+            <div class="bg-slate-800 rounded-xl overflow-hidden">
+                <div class="p-3 border-b border-slate-700 bg-emerald-500/10">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-emerald-500/30 text-emerald-400">L</div>
+                        <span class="font-bold text-white">Lucid</span>
+                    </div>
+                </div>
+                <div class="p-3 border-b border-slate-700">
+                    <h4 class="flex items-center gap-2 text-emerald-400 font-medium mb-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        Strengths
+                    </h4>
+                    <ul class="space-y-1 text-xs">
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Delivery records (up 63%)</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Gravity SUV profitable</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-emerald-400">✓</span> Uber/Nuro robotaxi deal</li>
+                    </ul>
+                </div>
+                <div class="p-3">
+                    <h4 class="flex items-center gap-2 text-red-400 font-medium mb-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Weaknesses
+                    </h4>
+                    <ul class="space-y-1 text-xs">
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Saudi dependency fears</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Morgan Stanley shorts</li>
+                        <li class="flex items-start gap-1 text-slate-300"><span class="text-red-400">✗</span> Path to profitability unclear</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Narratives by Company -->
+        <h3 class="text-xl font-bold text-white mb-4">Key Narratives by Company</h3>
+        <div class="space-y-4 mb-8">
+            <!-- Tesla Narratives -->
+            <div class="bg-slate-800 rounded-xl p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-indigo-500/20 text-indigo-400">T</div>
+                    <h4 class="text-lg font-bold text-white">Tesla Narratives</h4>
+                </div>
+                <div class="grid gap-3">
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-emerald-400 mt-1">▲</span>
+                        <div>
+                            <h5 class="font-medium text-white">FSD China Breakthrough</h5>
+                            <p class="text-slate-400 text-sm">FSD rollout in China generating extreme enthusiasm — "INSANE" performance driving stock interest</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-emerald-400 mt-1">▲</span>
+                        <div>
+                            <h5 class="font-medium text-white">SpaceX Merger Speculation</h5>
+                            <p class="text-slate-400 text-sm">Retail investors speculating on SpaceX merger potential — "$1000 stock if confirmed"</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-gray-400 mt-1">●</span>
+                        <div>
+                            <h5 class="font-medium text-white">Robotaxi Timeline Questions</h5>
+                            <p class="text-slate-400 text-sm">Unsupervised testing reportedly halted in Austin — timeline uncertainty persists</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BYD Narratives -->
+            <div class="bg-slate-800 rounded-xl p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-rose-500/20 text-rose-400">B</div>
+                    <h4 class="text-lg font-bold text-white">BYD Narratives</h4>
+                </div>
+                <div class="grid gap-3">
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-emerald-400 mt-1">▲</span>
+                        <div>
+                            <h5 class="font-medium text-white">Global Sales Leadership</h5>
+                            <p class="text-slate-400 text-sm">BYD outsold Tesla by 600K+ EVs in 2025 — 2.25M vs 1.64M driving "volume champion" narrative</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-amber-400 mt-1">◐</span>
+                        <div>
+                            <h5 class="font-medium text-white">Profitability Debate</h5>
+                            <p class="text-slate-400 text-sm">Mixed views on margins — "sells at a loss" vs "Tesla's gross profit 17.4% vs BYD's 4.73%"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rivian Narratives -->
+            <div class="bg-slate-800 rounded-xl p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-amber-500/20 text-amber-400">R</div>
+                    <h4 class="text-lg font-bold text-white">Rivian Narratives</h4>
+                </div>
+                <div class="grid gap-3">
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-emerald-400 mt-1">▲</span>
+                        <div>
+                            <h5 class="font-medium text-white">FCF Inflection Point</h5>
+                            <p class="text-slate-400 text-sm">Growing optimism around approaching positive free cash flow — "nearer than most think"</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-red-400 mt-1">▼</span>
+                        <div>
+                            <h5 class="font-medium text-white">Recall Impact</h5>
+                            <p class="text-slate-400 text-sm">19,641 vehicle recall for toe link bolt issue dampening near-term sentiment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lucid Narratives -->
+            <div class="bg-slate-800 rounded-xl p-5">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-lg flex items-center justify-center font-bold bg-emerald-500/20 text-emerald-400">L</div>
+                    <h4 class="text-lg font-bold text-white">Lucid Narratives</h4>
+                </div>
+                <div class="grid gap-3">
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-emerald-400 mt-1">▲</span>
+                        <div>
+                            <h5 class="font-medium text-white">Delivery Records</h5>
+                            <p class="text-slate-400 text-sm">December US sales estimate revised up 63% to 2,400+ units — positive momentum signal</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 bg-slate-900/50 rounded-lg p-3">
+                        <span class="text-red-400 mt-1">▼</span>
+                        <div>
+                            <h5 class="font-medium text-white">Saudi/Wall Street Tension</h5>
+                            <p class="text-slate-400 text-sm">Morgan Stanley shorts + Saudi buyout fears creating negative overhang on sentiment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cross-Company Influencers -->
+        <h3 class="text-xl font-bold text-white mb-4">Cross-Company Influencers</h3>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="bg-slate-800 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-medium text-white">Sawyer Merritt</span>
+                    <span class="text-xs px-2 py-1 rounded border bg-blue-500/20 text-blue-400 border-blue-500/30">news</span>
+                </div>
+                <p class="text-slate-500 text-sm">@SawyerMerritt</p>
+                <p class="text-slate-400 text-sm mt-1">1.02M followers</p>
+            </div>
+            <div class="bg-slate-800 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-medium text-white">Whole Mars</span>
+                    <span class="text-xs px-2 py-1 rounded border bg-green-500/20 text-green-400 border-green-500/30">influencer</span>
+                </div>
+                <p class="text-slate-500 text-sm">@wholemars</p>
+                <p class="text-slate-400 text-sm mt-1">708K followers</p>
+            </div>
+            <div class="bg-slate-800 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-medium text-white">Teslaconomics</span>
+                    <span class="text-xs px-2 py-1 rounded border bg-purple-500/20 text-purple-400 border-purple-500/30">analyst</span>
+                </div>
+                <p class="text-slate-500 text-sm">@Teslaconomics</p>
+                <p class="text-slate-400 text-sm mt-1">461K followers</p>
+            </div>
+            <div class="bg-slate-800 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="font-medium text-white">Fred Lambert</span>
+                    <span class="text-xs px-2 py-1 rounded border bg-amber-500/20 text-amber-400 border-amber-500/30">journalist</span>
+                </div>
+                <p class="text-slate-500 text-sm">@FredLambert</p>
+                <p class="text-slate-400 text-sm mt-1">47K followers</p>
+            </div>
+        </div>
+
+        <!-- Competitive Insights - IMPROVED with non-trivial content -->
+        <h3 class="text-xl font-bold text-white mb-4">Competitive Insights</h3>
+        <div class="bg-gradient-to-r from-slate-800 to-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700">
+            <div class="grid grid-cols-3 gap-6">
+                <div class="text-center">
+                    <p class="text-slate-400 text-sm mb-2">Highest Competitor Sentiment</p>
+                    <p class="text-2xl font-bold text-amber-400">Rivian</p>
+                    <p class="text-slate-500 text-xs mt-1">52 score | 7.5% SOV</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-slate-400 text-sm mb-2">Most Contested Space</p>
+                    <p class="text-2xl font-bold text-amber-400">Profitability Path</p>
+                    <p class="text-slate-500 text-xs mt-1">All 3 competitors scrutinized</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-slate-400 text-sm mb-2">Sentiment Spread</p>
+                    <p class="text-2xl font-bold text-indigo-400">15 pts</p>
+                    <p class="text-slate-500 text-xs mt-1">Tesla (60) to Lucid (45)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Note -->
+        <div class="mt-8 bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+            <h3 class="text-lg font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Methodology Note
+            </h3>
+            <div class="text-slate-400 text-sm space-y-2">
+                <p><strong class="text-slate-300">Data Collection:</strong> This report analyzed 17,386 tweets across 4 companies over a 7-day period (Jan 7-14, 2026). Data was fetched via XPOZ MCP using expanded queries (brand name + ticker symbol) to capture comprehensive mentions.</p>
+                <p><strong class="text-slate-300">Sentiment Analysis:</strong> Tweets were classified using a 5-level scale (positive, leaning_positive, neutral, leaning_negative, negative) based on keyword analysis and contextual indicators. Sentiment scores (0-100) weight positive content higher with penalty for negative mentions.</p>
+                <p><strong class="text-slate-300">Share of Voice:</strong> Calculated as each company's tweet count divided by total tweets across all analyzed companies. Tesla's 84% dominance reflects significantly higher social media presence compared to emerging EV competitors.</p>
+                <p><strong class="text-slate-300">Limitations:</strong> Analysis based on English-language Twitter/X data only. Sentiment classification uses heuristic methods and may not capture nuanced opinions. Volume reflects social media activity, not market share or business performance.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 pt-6 border-t border-slate-700 text-center">
+            <p class="text-slate-500 text-sm">
+                Powered by <a href="https://xpoz.ai" class="text-indigo-400 hover:text-indigo-300">XPOZ MCP Social Intelligence</a> — visit xpoz.ai to see how you can use it
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Volume Chart
+        const volumeCtx = document.getElementById('volumeChart').getContext('2d');
+        new Chart(volumeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Tesla', 'Rivian', 'Lucid', 'BYD'],
+                datasets: [{
+                    label: 'Mentions',
+                    data: [14603, 1305, 860, 618],
+                    backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#f43f5e'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: {
+                        grid: { color: '#334155' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8' }
+                    }
+                }
+            }
+        });
+
+        // Share of Voice Chart
+        const sovCtx = document.getElementById('sovChart').getContext('2d');
+        new Chart(sovCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Tesla', 'Rivian', 'Lucid', 'BYD'],
+                datasets: [{
+                    data: [84.0, 7.5, 5.0, 3.5],
+                    backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#f43f5e'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

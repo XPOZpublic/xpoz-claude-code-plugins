@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Influencer Discovery Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .tier-mega { background: linear-gradient(135deg, #a855f7, #ec4899); }
+        .tier-macro { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+        .tier-micro { background: linear-gradient(135deg, #10b981, #14b8a6); }
+        .tier-nano { background: linear-gradient(135deg, #f59e0b, #f97316); }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+    <div class="max-w-6xl mx-auto p-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-4xl font-bold gradient-text mb-2">Tesla Influencer Discovery</h1>
+                <p class="text-slate-400">118,651 users analyzed • 338,283 tweets • Last 7 days</p>
+            </div>
+            <div class="flex gap-6">
+                <div class="text-center bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                    <div class="text-3xl font-bold text-green-400">12</div>
+                    <div class="text-sm text-slate-400">Partnership<br>Opportunities</div>
+                </div>
+                <div class="text-center bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+                    <div class="text-3xl font-bold text-amber-400">4</div>
+                    <div class="text-sm text-slate-400">Rising<br>Stars</div>
+                </div>
+                <div class="text-center bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+                    <div class="text-3xl font-bold text-red-400">2</div>
+                    <div class="text-sm text-slate-400">Critical<br>Voices</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Card -->
+        <div class="bg-gradient-to-r from-slate-800 to-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700">
+            <h2 class="text-2xl font-bold mb-3">News Aggregators Dominate Tesla Coverage; Independent Analysts Offer Partnership Value</h2>
+            <p class="text-slate-300 text-lg mb-4">While mega-tier news accounts (@WatcherGuru, @MarioNawfal) drive volume, the highest-quality partnership opportunities exist in the Macro tier where independent analysts like @garyblack00 and @niccruzpatane combine credibility with engaged audiences.</p>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-green-500">
+                    <p class="text-sm text-slate-400 mb-1"><strong class="text-green-400">Partnership Strategy:</strong></p>
+                    <p class="text-slate-300 text-sm">Focus on Macro-tier analysts (@garyblack00, @TeslaPodcast) and high-engagement content creators (@wholemars, @Teslaconomics). These accounts offer authentic endorsement potential without the noise of news aggregators.</p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-red-500">
+                    <p class="text-sm text-slate-400 mb-1"><strong class="text-red-400">Risk Assessment:</strong></p>
+                    <p class="text-slate-300 text-sm">Monitor @RealDanODowd (36K followers) who runs "The Dawn Project" campaign against FSD, and @BradMunchen (24K) who publishes weekly Tesla skeptic content. Both have credibility with mainstream media.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tier Distribution -->
+        <div class="grid grid-cols-4 gap-4 mb-8">
+            <div class="bg-purple-500/10 rounded-xl p-5 border border-purple-500/30">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 tier-mega rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <span class="font-semibold text-purple-400">Mega</span>
+                </div>
+                <div class="text-4xl font-bold text-white mb-1">7</div>
+                <div class="text-sm text-slate-500">1M+ followers</div>
+            </div>
+            <div class="bg-blue-500/10 rounded-xl p-5 border border-blue-500/30">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 tier-macro rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <span class="font-semibold text-blue-400">Macro</span>
+                </div>
+                <div class="text-4xl font-bold text-white mb-1">18</div>
+                <div class="text-sm text-slate-500">100K-1M followers</div>
+            </div>
+            <div class="bg-emerald-500/10 rounded-xl p-5 border border-emerald-500/30">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 tier-micro rounded-lg flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744l.311 1.242a1 1 0 00.73.73l1.242.311a1 1 0 010 1.934l-1.242.311a1 1 0 00-.73.73l-.311 1.242a1 1 0 01-1.934 0l-.311-1.242a1 1 0 00-.73-.73l-1.242-.311a1 1 0 010-1.934l1.242-.311a1 1 0 00.73-.73L11.033 2.744A1 1 0 0112 2z"></path></svg>
+                    </div>
+                    <span class="font-semibold text-emerald-400">Micro</span>
+                </div>
+                <div class="text-4xl font-bold text-white mb-1">28</div>
+                <div class="text-sm text-slate-500">10K-100K followers</div>
+            </div>
+            <div class="bg-amber-500/10 rounded-xl p-5 border border-amber-500/30">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 tier-nano rounded-lg flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="5"></circle></svg>
+                    </div>
+                    <span class="font-semibold text-amber-400">Nano</span>
+                </div>
+                <div class="text-4xl font-bold text-white mb-1">92</div>
+                <div class="text-sm text-slate-500">&lt;10K followers</div>
+            </div>
+        </div>
+
+        <!-- Voice Type Distribution Chart -->
+        <div class="grid grid-cols-2 gap-6 mb-8">
+            <div class="bg-slate-800 rounded-xl p-6">
+                <h3 class="text-lg font-semibold mb-4">Voice Type Distribution</h3>
+                <canvas id="voiceTypeChart" height="200"></canvas>
+            </div>
+            <div class="bg-slate-800 rounded-xl p-6">
+                <h3 class="text-lg font-semibold mb-4">Top Niches</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300">Tesla/EV News</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-indigo-500 rounded-full" style="width: 35%"></div>
+                            </div>
+                            <span class="text-slate-400 text-sm">35%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300">Stock/Investment Analysis</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full" style="width: 28%"></div>
+                            </div>
+                            <span class="text-slate-400 text-sm">28%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300">FSD/Autonomy</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-emerald-500 rounded-full" style="width: 18%"></div>
+                            </div>
+                            <span class="text-slate-400 text-sm">18%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300">Crypto/Trading</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-amber-500 rounded-full" style="width: 12%"></div>
+                            </div>
+                            <span class="text-slate-400 text-sm">12%</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-300">Owner Community</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-32 h-2 bg-slate-700 rounded-full overflow-hidden">
+                                <div class="h-full bg-pink-500 rounded-full" style="width: 7%"></div>
+                            </div>
+                            <span class="text-slate-400 text-sm">7%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Influencers by Tier -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold mb-4">Top Influencers by Tier</h3>
+
+            <!-- Mega Tier -->
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-6 h-6 tier-mega rounded flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <span class="font-semibold text-purple-400">Mega Tier (1M+ followers)</span>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <!-- Elon Musk -->
+                    <div class="bg-slate-800 rounded-xl p-4 border border-purple-500/30">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <div class="font-semibold text-white">Elon Musk</div>
+                                <div class="text-slate-500 text-sm">@elonmusk</div>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30">founder</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-slate-400">232.1M followers</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-green-500/20 text-green-400">positive</span>
+                        </div>
+                        <div class="mt-3 text-xs text-slate-500 bg-slate-900/50 rounded p-2">
+                            <span class="text-slate-400">Partnership Score:</span> <span class="text-purple-400 font-bold">N/A (Founder)</span>
+                        </div>
+                    </div>
+                    <!-- Sawyer Merritt -->
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">92</div>
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <div class="font-semibold text-white">Sawyer Merritt</div>
+                                <div class="text-slate-500 text-sm">@SawyerMerritt</div>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">news</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-slate-400">1.02M followers</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-green-500/20 text-green-400">positive</span>
+                        </div>
+                        <div class="mt-3 text-xs text-slate-500 bg-slate-900/50 rounded p-2 italic">
+                            "EV/space/tech news. Bringing you the latest news in a single, easy-to-read feed."
+                        </div>
+                    </div>
+                    <!-- Watcher Guru -->
+                    <div class="bg-slate-800 rounded-xl p-4">
+                        <div class="flex items-start justify-between mb-3">
+                            <div>
+                                <div class="font-semibold text-white">Watcher.Guru</div>
+                                <div class="text-slate-500 text-sm">@WatcherGuru</div>
+                            </div>
+                            <span class="text-xs px-2 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">news</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-slate-400">3.69M followers</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-gray-500/20 text-gray-400">neutral</span>
+                        </div>
+                        <div class="mt-3 text-xs text-slate-500 bg-slate-900/50 rounded p-2 italic">
+                            "JUST IN: Tesla $TSLA Full Self-Driving will switch to a monthly subscription..." (2.1K likes)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Macro Tier -->
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-6 h-6 tier-macro rounded flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <span class="font-semibold text-blue-400">Macro Tier (100K-1M followers)</span>
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <!-- Gary Black -->
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">95</div>
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <div class="font-semibold text-white text-sm">Gary Black</div>
+                                <div class="text-slate-500 text-xs">@garyblack00</div>
+                            </div>
+                            <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">analyst</span>
+                        </div>
+                        <div class="text-xs text-slate-400">552K followers</div>
+                        <div class="text-xs mt-2 text-green-400">Managing Partner, The Future Fund</div>
+                    </div>
+                    <!-- Whole Mars -->
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">88</div>
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <div class="font-semibold text-white text-sm">Whole Mars Catalog</div>
+                                <div class="text-slate-500 text-xs">@wholemars</div>
+                            </div>
+                            <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                        </div>
+                        <div class="text-xs text-slate-400">708K followers</div>
+                        <div class="text-xs mt-2 text-green-400">607K likes on Tesla content</div>
+                    </div>
+                    <!-- Teslaconomics -->
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">90</div>
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <div class="font-semibold text-white text-sm">Teslaconomics</div>
+                                <div class="text-slate-500 text-xs">@Teslaconomics</div>
+                            </div>
+                            <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                        </div>
+                        <div class="text-xs text-slate-400">461K followers</div>
+                        <div class="text-xs mt-2 text-green-400">680K likes, 104K retweets</div>
+                    </div>
+                    <!-- Steven Mark Ryan -->
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">85</div>
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <div class="font-semibold text-white text-sm">stevenmarkryan</div>
+                                <div class="text-slate-500 text-xs">@stevenmarkryan</div>
+                            </div>
+                            <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                        </div>
+                        <div class="text-xs text-slate-400">413K followers</div>
+                        <div class="text-xs mt-2 text-slate-500 italic">"My mouth: Tesla, My money: $TSLA"</div>
+                    </div>
+                    <!-- Rob Maurer -->
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">91</div>
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <div class="font-semibold text-white text-sm">Rob Maurer</div>
+                                <div class="text-slate-500 text-xs">@TeslaPodcast</div>
+                            </div>
+                            <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">analyst</span>
+                        </div>
+                        <div class="text-xs text-slate-400">355K followers</div>
+                        <div class="text-xs mt-2 text-green-400">Tesla Daily host 2017-2024</div>
+                    </div>
+                    <!-- Teslarati -->
+                    <div class="bg-slate-800 rounded-xl p-4">
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <div class="font-semibold text-white text-sm">TESLARATI</div>
+                                <div class="text-slate-500 text-xs">@Teslarati</div>
+                            </div>
+                            <span class="text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-400">news</span>
+                        </div>
+                        <div class="text-xs text-slate-400">924K followers</div>
+                        <div class="text-xs mt-2 text-slate-500">Tesla, SpaceX, Elon Musk news</div>
+                    </div>
+                    <!-- DirtyTesLa -->
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">82</div>
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <div class="font-semibold text-white text-sm">Dirty Tesla</div>
+                                <div class="text-slate-500 text-xs">@DirtyTesLa</div>
+                            </div>
+                            <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                        </div>
+                        <div class="text-xs text-slate-400">140K followers</div>
+                        <div class="text-xs mt-2 text-slate-500 italic">"Tesla FSD takes me out of Miami with 0 interventions" (434 likes)</div>
+                    </div>
+                    <!-- squawksquare -->
+                    <div class="bg-slate-800 rounded-xl p-4">
+                        <div class="flex items-start justify-between mb-2">
+                            <div>
+                                <div class="font-semibold text-white text-sm">squawksquare</div>
+                                <div class="text-slate-500 text-xs">@squawksquare</div>
+                            </div>
+                            <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">analyst</span>
+                        </div>
+                        <div class="text-xs text-slate-400">117K followers</div>
+                        <div class="text-xs mt-2 text-yellow-400">Tesla Realist - balanced view</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Micro Tier -->
+            <div class="mb-6">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-6 h-6 tier-micro rounded flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1z"></path></svg>
+                    </div>
+                    <span class="font-semibold text-emerald-400">Micro Tier (10K-100K followers)</span>
+                </div>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">87</div>
+                        <div class="font-semibold text-white text-sm">Herbert Ong</div>
+                        <div class="text-slate-500 text-xs mb-2">@herbertong • 94K</div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400">interviewer</span>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">89</div>
+                        <div class="font-semibold text-white text-sm">Nic Cruz Patane</div>
+                        <div class="text-slate-500 text-xs mb-2">@niccruzpatane • 90K</div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">analyst</span>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">83</div>
+                        <div class="font-semibold text-white text-sm">Tsla Chan</div>
+                        <div class="text-slate-500 text-xs mb-2">@Tslachan • 62K</div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">78</div>
+                        <div class="font-semibold text-white text-sm">Tom Nash</div>
+                        <div class="text-slate-500 text-xs mb-2">@iamtomnash • 155K</div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">analyst</span>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">80</div>
+                        <div class="font-semibold text-white text-sm">Pejjy</div>
+                        <div class="text-slate-500 text-xs mb-2">@CuriousPejjy • 30K</div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">76</div>
+                        <div class="font-semibold text-white text-sm">Dalton Brewer</div>
+                        <div class="text-slate-500 text-xs mb-2">@daltonbrewer • 33K</div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">75</div>
+                        <div class="font-semibold text-white text-sm">Cole Grinde</div>
+                        <div class="text-slate-500 text-xs mb-2">@GrindeOptions • 39K</div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-green-500/20 text-green-400">trader</span>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-4 relative">
+                        <div class="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full">74</div>
+                        <div class="font-semibold text-white text-sm">Eva McMillan</div>
+                        <div class="text-slate-500 text-xs mb-2">@EvasTeslaSPlaid • 132K</div>
+                        <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partnership Opportunities -->
+        <div class="bg-green-500/5 rounded-xl p-6 mb-8 border border-green-500/20">
+            <h3 class="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                Top Partnership Opportunities
+            </h3>
+            <p class="text-slate-400 text-sm mb-4">High-value independent voices with positive sentiment and engaged audiences. Excludes official Tesla accounts.</p>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="bg-slate-800 rounded-lg p-4 border border-green-500/30">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-semibold">@garyblack00</span>
+                        <span class="text-green-400 font-bold">95/100</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">552K • Analyst • Fund Manager</p>
+                    <p class="text-xs text-green-400 mt-2">Why: SEC-registered adviser with institutional credibility</p>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-green-500/30">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-semibold">@SawyerMerritt</span>
+                        <span class="text-green-400 font-bold">92/100</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">1.02M • News • EV/Space</p>
+                    <p class="text-xs text-green-400 mt-2">Why: Mega reach with 2.5M likes, trusted news source</p>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-green-500/30">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-semibold">@TeslaPodcast</span>
+                        <span class="text-green-400 font-bold">91/100</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">355K • Analyst • Podcast</p>
+                    <p class="text-xs text-green-400 mt-2">Why: 7+ years Tesla coverage, deep institutional knowledge</p>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-green-500/30">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-semibold">@Teslaconomics</span>
+                        <span class="text-green-400 font-bold">90/100</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">461K • Influencer • Long-term</p>
+                    <p class="text-xs text-green-400 mt-2">Why: 680K likes, authentic community leader</p>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-green-500/30">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-semibold">@niccruzpatane</span>
+                        <span class="text-green-400 font-bold">89/100</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">90K • Analyst • Deep Dives</p>
+                    <p class="text-xs text-green-400 mt-2">Why: 1M+ likes, technical analysis expertise</p>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-green-500/30">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-semibold">@wholemars</span>
+                        <span class="text-green-400 font-bold">88/100</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">708K • Influencer • FSD Focus</p>
+                    <p class="text-xs text-green-400 mt-2">Why: 607K likes, strong FSD advocacy</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rising Stars -->
+        <div class="bg-amber-500/5 rounded-xl p-6 mb-8 border border-amber-500/20">
+            <h3 class="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                Rising Stars
+            </h3>
+            <p class="text-slate-400 text-sm mb-4">High engagement rate (&gt;2%) with smaller followings (&lt;50K). Early partnership potential before they hit mainstream.</p>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="bg-slate-800 rounded-lg p-4 border border-amber-500/30">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        <span class="font-semibold">TeslaCamWorld</span>
+                    </div>
+                    <p class="text-slate-500 text-sm">@TeslaCamWorld • 1.8K</p>
+                    <p class="text-amber-400 text-sm mt-2">4.2% engagement rate</p>
+                    <p class="text-xs text-slate-400 mt-1">FSD clips & dashcam content</p>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-amber-500/30">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        <span class="font-semibold">mrfundman</span>
+                    </div>
+                    <p class="text-slate-500 text-sm">@mrfundman • 15K</p>
+                    <p class="text-amber-400 text-sm mt-2">3.5% engagement rate</p>
+                    <p class="text-xs text-slate-400 mt-1">FSD & AI focus, 82K likes</p>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-amber-500/30">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        <span class="font-semibold">Ming</span>
+                    </div>
+                    <p class="text-slate-500 text-sm">@tslaming • 9.5K</p>
+                    <p class="text-amber-400 text-sm mt-2">3.3% engagement rate</p>
+                    <p class="text-xs text-slate-400 mt-1">Tesla news & rumors, 96K likes</p>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-amber-500/30">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        <span class="font-semibold">Automoto</span>
+                    </div>
+                    <p class="text-slate-500 text-sm">@Automoto415792 • 935</p>
+                    <p class="text-amber-400 text-sm mt-2">5.2% engagement rate</p>
+                    <p class="text-xs text-slate-400 mt-1">Automotive content, 13.8K likes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Critical Voices -->
+        <div class="bg-red-500/5 rounded-xl p-6 mb-8 border border-red-500/20">
+            <h3 class="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                Critical Voices to Monitor
+            </h3>
+            <p class="text-slate-400 text-sm mb-4">Accounts with significant reach that consistently post negative Tesla content. Monitor for PR risk management.</p>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-slate-800 rounded-lg p-4 border border-red-500/30">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <div class="font-semibold text-white">Dan O'Dowd</div>
+                            <div class="text-slate-500 text-sm">@RealDanODowd</div>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded bg-red-500/20 text-red-400 border border-red-500/30">critic</span>
+                    </div>
+                    <div class="text-sm text-slate-400 mb-2">35.8K followers</div>
+                    <div class="bg-slate-900/50 rounded p-3 text-sm">
+                        <p class="text-slate-300 italic">"Green Hills Software CEO and Founder of The Dawn Project. I am running a campaign to make computers safe for humanity and ban Tesla Full Self-Driving."</p>
+                    </div>
+                    <div class="mt-3 text-xs text-red-400">Risk: Active FSD safety campaign with media coverage. 71K likes, 16K retweets on Tesla content.</div>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-red-500/30">
+                    <div class="flex items-start justify-between mb-3">
+                        <div>
+                            <div class="font-semibold text-white">Motorhead</div>
+                            <div class="text-slate-500 text-sm">@BradMunchen</div>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded bg-red-500/20 text-red-400 border border-red-500/30">skeptic</span>
+                    </div>
+                    <div class="text-sm text-slate-400 mb-2">24.2K followers</div>
+                    <div class="bg-slate-900/50 rounded p-3 text-sm">
+                        <p class="text-slate-300 italic">"Automotive long/short & Tesla skeptic. More in-depth, weekly updates on Tesla & its automotive rivals."</p>
+                    </div>
+                    <div class="mt-3 text-xs text-red-400">Risk: Regular skeptic newsletter with analytical approach. 22K likes on Tesla content.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Influencer Quotes -->
+        <div class="bg-slate-800 rounded-xl p-6 mb-8">
+            <h3 class="text-xl font-bold mb-4">High-Engagement Quotes</h3>
+            <div class="space-y-4">
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-indigo-500">
+                    <p class="text-slate-300 mb-2">"JUST IN: Elon Musk says Tesla $TSLA Full Self-Driving will switch to a monthly subscription & remove the one-time purchase option."</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-slate-500">@WatcherGuru • 3.69M followers</span>
+                        <span class="text-slate-400">2,156 likes • 162 retweets</span>
+                    </div>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-green-500">
+                    <p class="text-slate-300 mb-2">"Tesla Self-Driving takes me out of Miami with 0 interventions."</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-slate-500">@DirtyTesLa • 140K followers</span>
+                        <span class="text-slate-400">434 likes • 21 retweets</span>
+                    </div>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-purple-500">
+                    <p class="text-slate-300 mb-2">"The gap will close. @Tesla $TSLA"</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-slate-500">@Micro2Macr0 • unknown followers</span>
+                        <span class="text-slate-400">445 likes • 12 retweets</span>
+                    </div>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4 border-l-4 border-blue-500">
+                    <p class="text-slate-300 mb-2">"My mouth: Tesla. My money: $TSLA"</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-slate-500">@stevenmarkryan • 413K followers</span>
+                        <span class="text-slate-400">386 likes • 13 retweets</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-12 pt-6 border-t border-slate-700 text-center">
+            <p class="text-slate-500 text-sm">
+                Powered by <a href="https://xpoz.ai" class="text-indigo-400 hover:text-indigo-300 transition-colors">XPOZ MCP Social Intelligence</a> — visit xpoz.ai to see how you can use it
+            </p>
+            <p class="text-slate-600 text-xs mt-2">Report generated January 14, 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Voice Type Chart
+        const ctx = document.getElementById('voiceTypeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Influencer', 'News', 'Analyst', 'Trader', 'Official', 'Community'],
+                datasets: [{
+                    data: [35, 22, 18, 12, 8, 5],
+                    backgroundColor: [
+                        '#ec4899',
+                        '#f59e0b',
+                        '#3b82f6',
+                        '#10b981',
+                        '#a855f7',
+                        '#06b6d4'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#94a3b8',
+                            padding: 15,
+                            font: { size: 12 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

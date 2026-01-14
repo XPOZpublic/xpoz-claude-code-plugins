@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Brand Snapshot Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+    <div class="max-w-6xl mx-auto p-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-4xl font-bold gradient-text">Tesla Brand Snapshot</h1>
+                <p class="text-slate-400 mt-2">Jan 7, 2026 to Jan 14, 2026 • 7-Day Analysis</p>
+                <p class="text-slate-500 text-sm mt-1">12,753 tweets analyzed • 118,576 users discussing</p>
+            </div>
+            <div class="text-right">
+                <div class="text-6xl font-bold text-emerald-400">60</div>
+                <div class="text-slate-400 text-sm mt-1">Sentiment Score</div>
+            </div>
+        </div>
+
+        <!-- Score Legend -->
+        <div class="bg-slate-800/50 rounded-xl px-4 py-3 mb-8 flex items-center gap-6 text-sm text-slate-400">
+            <span class="font-medium text-slate-300">Sentiment Scores (0-100):</span>
+            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> 60+ Positive</span>
+            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-400"></span> 40-59 Mixed</span>
+            <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-500"></span> &lt;40 Negative</span>
+            <span class="text-slate-500 ml-auto">Higher = more positive social sentiment</span>
+        </div>
+
+        <!-- Summary Card with Analyst View -->
+        <div class="bg-gradient-to-r from-slate-800 to-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700">
+            <h2 class="text-2xl font-bold mb-3">Tesla FSD Momentum Drives Bullish Sentiment</h2>
+            <p class="text-slate-300 text-lg mb-4">Strong positive sentiment driven by FSD achievements in China and MotorTrend award, offset by safety scrutiny and halted unsupervised tests in Austin.</p>
+            <div class="border-t border-slate-700 pt-4">
+                <span class="text-indigo-400 font-medium">Analyst View:</span>
+                <p class="text-slate-300 mt-2">Gary Black (@garyblack00, Future Fund) maintains bullish outlook on Tesla's robotaxi potential. New Street Research raised price target to $600, citing FSD progress. Dan O'Dowd (@RealDanODowd, Dawn Project) continues safety campaign. Steven Mark Ryan notes "Jensen Huang COOKS Tesla Autonomy Skeptics" highlighting NVIDIA CEO's validation of Tesla's AI stack.</p>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-2 gap-8 mb-8">
+            <!-- Sentiment Breakdown Pie Chart -->
+            <div class="bg-slate-800 rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-white mb-4">Sentiment Breakdown (5-Level)</h3>
+                <div class="h-64 flex items-center justify-center">
+                    <canvas id="sentimentChart" width="280" height="280"></canvas>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 mt-4">
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                        <span class="text-slate-400">Positive 32%</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="w-3 h-3 rounded-full bg-emerald-300"></span>
+                        <span class="text-slate-400">Leaning + 18%</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="w-3 h-3 rounded-full bg-gray-500"></span>
+                        <span class="text-slate-400">Neutral 28%</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                        <span class="text-slate-400">Leaning - 12%</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="text-slate-400">Negative 10%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="bg-slate-800 rounded-xl p-6">
+                <h3 class="text-lg font-semibold text-white mb-4">Key Metrics</h3>
+                <div class="space-y-4">
+                    <div class="bg-slate-900/50 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Total Tweets</span>
+                            <span class="text-2xl font-bold text-white">12,753</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900/50 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Users Discussing</span>
+                            <span class="text-2xl font-bold text-white">118,576</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900/50 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Net Sentiment</span>
+                            <span class="text-2xl font-bold text-emerald-400">+40%</span>
+                        </div>
+                        <p class="text-slate-500 text-sm mt-1">Positive minus Negative</p>
+                    </div>
+                    <div class="bg-slate-900/50 rounded-lg p-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Top Engagement Tweet</span>
+                            <span class="text-xl font-bold text-amber-400">3,310 ❤️</span>
+                        </div>
+                        <p class="text-slate-500 text-sm mt-1">SpaceX merger speculation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Narratives Section -->
+        <div class="bg-slate-800 rounded-xl p-6 mb-8">
+            <h3 class="text-xl font-semibold text-white mb-6">Key Narratives</h3>
+            <div class="space-y-4">
+                <!-- Narrative 1 -->
+                <div class="flex items-start gap-4 bg-slate-900/50 rounded-xl p-4">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-emerald-500 text-white">Positive</span>
+                    <div>
+                        <h4 class="font-medium text-white text-lg">FSD & Autonomous Driving Progress</h4>
+                        <p class="text-slate-400 mt-1">Tesla FSD wins MotorTrend's Best Driver Assistance Award. FSD 14.2.2.2 now avoids potholes. Multiple tweets praising FSD performance in China as "insane" with Jensen Huang validating Tesla's AI stack as "World Class."</p>
+                    </div>
+                </div>
+
+                <!-- Narrative 2 -->
+                <div class="flex items-start gap-4 bg-slate-900/50 rounded-xl p-4">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-emerald-500 text-white">Positive</span>
+                    <div>
+                        <h4 class="font-medium text-white text-lg">Robotaxi & Optimus Vision</h4>
+                        <p class="text-slate-400 mt-1">Strong bullish sentiment around Tesla's robotaxi future. Reports of removing safety drivers from fleet. Elon Musk's projections: Robotaxi could make Tesla $5T, Optimus could make it $25T. Significant excitement about autonomous future.</p>
+                    </div>
+                </div>
+
+                <!-- Narrative 3 -->
+                <div class="flex items-start gap-4 bg-slate-900/50 rounded-xl p-4">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-emerald-300 text-slate-900">Leaning +</span>
+                    <div>
+                        <h4 class="font-medium text-white text-lg">Stock Investment Sentiment</h4>
+                        <p class="text-slate-400 mt-1">New Street Research raises price target to $600. Piper Sandler reiterates Overweight rating. Multiple investors sharing buying activity. SpaceX merger speculation drives excitement with one tweet getting 3,310 likes.</p>
+                    </div>
+                </div>
+
+                <!-- Narrative 4 -->
+                <div class="flex items-start gap-4 bg-slate-900/50 rounded-xl p-4">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-red-500 text-white">Negative</span>
+                    <div>
+                        <h4 class="font-medium text-white text-lg">Safety Scrutiny & Criticism</h4>
+                        <p class="text-slate-400 mt-1">Tesla halted unsupervised tests in Austin without explanation (527 likes). Dan O'Dowd's Dawn Project continues campaign to ban FSD. Some tweets highlight safety incidents. Mixed reception on full autonomy readiness.</p>
+                    </div>
+                </div>
+
+                <!-- Narrative 5 -->
+                <div class="flex items-start gap-4 bg-slate-900/50 rounded-xl p-4">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-emerald-500 text-white">Positive</span>
+                    <div>
+                        <h4 class="font-medium text-white text-lg">China Market Dominance</h4>
+                        <p class="text-slate-400 mt-1">Tesla Model Y dominates Korea's December imported EV registrations. Model Y 'Black Badge' approved in China regulatory filing. Entire Tesla lineup enters 'Black Badge' era. Strong China demand narrative.</p>
+                    </div>
+                </div>
+
+                <!-- Narrative 6 -->
+                <div class="flex items-start gap-4 bg-slate-900/50 rounded-xl p-4">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium bg-gray-500 text-white">Neutral</span>
+                    <div>
+                        <h4 class="font-medium text-white text-lg">Competition Landscape</h4>
+                        <p class="text-slate-400 mt-1">Comparisons with Rivian Cybertruck competitor, Lucid's premium positioning, and BYD's China challenge. Tesla generally viewed as leader but competition narrative is balanced without clear bullish/bearish lean.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SWOT Analysis -->
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-white mb-6">SWOT Analysis</h3>
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Strengths -->
+                <div class="bg-emerald-500/10 rounded-xl p-6 border border-emerald-500/30">
+                    <h4 class="font-semibold text-emerald-400 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        Strengths
+                    </h4>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> FSD technology leadership & MotorTrend award validation</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Strong brand loyalty & passionate investor community</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> $1.4T market cap dominance in EV space</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> China market leadership (Korea EV registrations #1)</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> NVIDIA CEO validation of AI/FSD stack</li>
+                    </ul>
+                </div>
+
+                <!-- Weaknesses -->
+                <div class="bg-red-500/10 rounded-xl p-6 border border-red-500/30">
+                    <h4 class="font-semibold text-red-400 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Weaknesses
+                    </h4>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Halted unsupervised tests in Austin raises questions</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Ongoing safety scrutiny & Dan O'Dowd campaign</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">✗</span> High valuation multiples relative to auto peers</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">✗</span> Elon Musk political involvement polarizes some users</li>
+                        <li class="flex items-start gap-2"><span class="text-red-400">✗</span> FSD "supervised" still not fully autonomous</li>
+                    </ul>
+                </div>
+
+                <!-- Opportunities -->
+                <div class="bg-blue-500/10 rounded-xl p-6 border border-blue-500/30">
+                    <h4 class="font-semibold text-blue-400 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        Opportunities
+                    </h4>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-blue-400">◆</span> Robotaxi launch could unlock $5T+ valuation</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">◆</span> Optimus humanoid robot commercialization ($25T potential)</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">◆</span> SpaceX merger speculation driving excitement</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">◆</span> Tesla Energy business expansion</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">◆</span> Model Y 7-seat option expands addressable market</li>
+                    </ul>
+                </div>
+
+                <!-- Threats -->
+                <div class="bg-amber-500/10 rounded-xl p-6 border border-amber-500/30">
+                    <h4 class="font-semibold text-amber-400 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Threats
+                    </h4>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-amber-400">⚠</span> Competition from Rivian, BYD, Lucid intensifying</li>
+                        <li class="flex items-start gap-2"><span class="text-amber-400">⚠</span> Regulatory scrutiny on FSD safety claims</li>
+                        <li class="flex items-start gap-2"><span class="text-amber-400">⚠</span> Dawn Project campaign gaining media attention</li>
+                        <li class="flex items-start gap-2"><span class="text-amber-400">⚠</span> NVIDIA becoming dominant AI infrastructure play</li>
+                        <li class="flex items-start gap-2"><span class="text-amber-400">⚠</span> China geopolitical risks & BYD local competition</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Influencers -->
+        <div class="bg-slate-800 rounded-xl p-6 mb-8">
+            <h3 class="text-xl font-semibold text-white mb-6">Top Influencers</h3>
+            <div class="grid grid-cols-3 gap-4">
+                <!-- Influencer 1 -->
+                <div class="bg-slate-900/50 rounded-xl p-4 relative">
+                    <span class="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium bg-emerald-500 text-white">Positive</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-xl font-bold">S</div>
+                        <div>
+                            <p class="font-medium text-white">Sawyer Merritt</p>
+                            <p class="text-slate-500 text-sm">@SawyerMerritt</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="text-slate-400">1.02M followers</span>
+                        <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">news</span>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-2">2.5M likes • 901 relevant tweets</p>
+                </div>
+
+                <!-- Influencer 2 -->
+                <div class="bg-slate-900/50 rounded-xl p-4 relative">
+                    <span class="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium bg-emerald-500 text-white">Positive</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-xl font-bold">W</div>
+                        <div>
+                            <p class="font-medium text-white">Whole Mars Catalog</p>
+                            <p class="text-slate-500 text-sm">@wholemars</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="text-slate-400">708K followers</span>
+                        <span class="px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">influencer</span>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-2">605K likes • 570 relevant tweets</p>
+                </div>
+
+                <!-- Influencer 3 -->
+                <div class="bg-slate-900/50 rounded-xl p-4 relative">
+                    <span class="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium bg-emerald-300 text-slate-900">Leaning +</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-xl font-bold">G</div>
+                        <div>
+                            <p class="font-medium text-white">Gary Black</p>
+                            <p class="text-slate-500 text-sm">@garyblack00</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="text-slate-400">552K followers</span>
+                        <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400">analyst</span>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-2">43K likes • Future Fund Managing Partner</p>
+                </div>
+
+                <!-- Influencer 4 -->
+                <div class="bg-slate-900/50 rounded-xl p-4 relative">
+                    <span class="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium bg-emerald-500 text-white">Positive</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-xl font-bold">T</div>
+                        <div>
+                            <p class="font-medium text-white">Teslaconomics</p>
+                            <p class="text-slate-500 text-sm">@Teslaconomics</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="text-slate-400">460K followers</span>
+                        <span class="px-2 py-0.5 rounded bg-green-500/20 text-green-400">investor</span>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-2">679K likes • Long-term Tesla investor</p>
+                </div>
+
+                <!-- Influencer 5 -->
+                <div class="bg-slate-900/50 rounded-xl p-4 relative">
+                    <span class="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium bg-emerald-500 text-white">Positive</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-xl font-bold">S</div>
+                        <div>
+                            <p class="font-medium text-white">Steven Mark Ryan</p>
+                            <p class="text-slate-500 text-sm">@stevenmarkryan</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="text-slate-400">412K followers</span>
+                        <span class="px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">creator</span>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-2">85K likes • Video content creator</p>
+                </div>
+
+                <!-- Influencer 6 (Critical Voice) -->
+                <div class="bg-slate-900/50 rounded-xl p-4 relative border border-red-500/30">
+                    <span class="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium bg-red-500 text-white">Negative</span>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-rose-500 flex items-center justify-center text-xl font-bold">D</div>
+                        <div>
+                            <p class="font-medium text-white">Dan O'Dowd</p>
+                            <p class="text-slate-500 text-sm">@RealDanODowd</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="text-slate-400">35K followers</span>
+                        <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400">critic</span>
+                    </div>
+                    <p class="text-slate-500 text-xs mt-2">71K likes • Dawn Project Founder</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Quotes -->
+        <div class="bg-slate-800 rounded-xl p-6 mb-8">
+            <h3 class="text-xl font-semibold text-white mb-6">High-Engagement Tweets</h3>
+            <div class="space-y-4">
+                <div class="bg-slate-900/50 rounded-xl p-4 border-l-4 border-emerald-500">
+                    <p class="text-slate-300 italic">"All Elon has to do is confirm SpaceX merger into Tesla and Tesla stock is $1000 Monday lol"</p>
+                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                        <span>@strengthPlan</span>
+                        <span class="text-amber-400">3,310 ❤️</span>
+                        <span>104 🔄</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/50 rounded-xl p-4 border-l-4 border-emerald-500">
+                    <p class="text-slate-300 italic">"Tesla FSD in China is INSANE. I need more $TSLA stock."</p>
+                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                        <span>@CuriousPejjy</span>
+                        <span class="text-amber-400">2,115 ❤️</span>
+                        <span>184 🔄</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/50 rounded-xl p-4 border-l-4 border-amber-400">
+                    <p class="text-slate-300 italic">"Tesla $TSLA has apparently halted unsupervised tests in Austin without explanation."</p>
+                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                        <span>@rdd147</span>
+                        <span class="text-amber-400">527 ❤️</span>
+                        <span>37 🔄</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/50 rounded-xl p-4 border-l-4 border-emerald-500">
+                    <p class="text-slate-300 italic">"Jensen Huang COOKS Tesla Autonomy Skeptics - Heated Debate Over Tesla vs NVIDIA Autonomy"</p>
+                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                        <span>@stevenmarkryan</span>
+                        <span class="text-amber-400">337 ❤️</span>
+                        <span>43 🔄</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900/50 rounded-xl p-4 border-l-4 border-emerald-500">
+                    <p class="text-slate-300 italic">"Tesla $TSLA just released the 7-seat option for the Model Y in the United States 🇺🇸🔥"</p>
+                    <div class="flex items-center gap-4 mt-3 text-sm text-slate-500">
+                        <span>@StockMKTNewz</span>
+                        <span class="text-amber-400">225 ❤️</span>
+                        <span>13 🔄</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Note -->
+        <div class="bg-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700">
+            <h4 class="text-sm font-semibold text-slate-400 mb-3">Methodology & Sampling</h4>
+            <p class="text-slate-500 text-xs leading-relaxed">
+                This report analyzed <strong>300 tweets</strong> from a total pool of <strong>14,407 mentions</strong> using multi-strategy sampling:
+                (A) High-engagement posts sorted by likes/retweets, (B) Recent posts from the last 48 hours for freshness, and
+                (C) Broader sample from mid-tier pages for diversity. Sentiment classification uses 5 levels: positive, leaning_positive,
+                neutral, leaning_negative, negative. The sentiment score (0-100) weights positive sentiment higher. Influencer data drawn
+                from 144 users out of 119,161 total engaged accounts, filtered to exclude official brand accounts. Data collected via XPOZ MCP
+                from Twitter/X. Period: January 7-14, 2026.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-12 pt-8 border-t border-slate-700 text-center">
+            <p class="text-slate-500 text-sm">
+                Powered by <a href="https://xpoz.ai" class="text-indigo-400 hover:text-indigo-300 transition-colors">XPOZ MCP Social Intelligence</a> — visit xpoz.ai to see how you can use it
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Sentiment Breakdown Chart
+        const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+        new Chart(sentimentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Positive', 'Leaning +', 'Neutral', 'Leaning -', 'Negative'],
+                datasets: [{
+                    data: [32, 18, 28, 12, 10],
+                    backgroundColor: [
+                        '#10b981',  // emerald-500
+                        '#6ee7b7',  // emerald-300
+                        '#6b7280',  // gray-500
+                        '#fbbf24',  // amber-400
+                        '#ef4444'   // red-500
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
