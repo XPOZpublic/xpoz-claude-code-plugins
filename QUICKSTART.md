@@ -2,8 +2,6 @@
 
 ## Step 1: Set Up XPOZ (Do This First!)
 
-Before using these skills, XPOZ needs to know what topics to monitor:
-
 1. **Sign up**: Go to [xpoz.ai](https://xpoz.ai) and click **"Start Free"**
 2. **Configure keywords**: Navigate to [xpoz.ai/settings](https://www.xpoz.ai/settings)
    - Add brand names you want to analyze (e.g., "Tesla", "NVIDIA")
@@ -11,7 +9,7 @@ Before using these skills, XPOZ needs to know what topics to monitor:
    - Allow some time for XPOZ to collect posts for your keywords
 3. **Get your API key**: Scroll to the bottom of the settings page
 
-> **Why this matters**: XPOZ collects social posts based on YOUR keywords. No keywords = no data for analysis.
+> **Run on ANY brand**: You can analyze any brand you want! Popular brands (Tesla, Apple, NVIDIA, etc.) typically have data already available. For niche or less well-known brands, add them as keywords during setup so XPOZ starts collecting social posts for your analysis.
 
 ## Step 2: Install Skills
 
