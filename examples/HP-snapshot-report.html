@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP Brand Snapshot Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+    <div class="max-w-5xl mx-auto p-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">HP Brand Snapshot</h1>
+                <p class="text-slate-400 mt-1">676 tweets analyzed • 7 days • Jan 7-14, 2026</p>
+            </div>
+            <div class="text-right">
+                <div class="text-5xl font-bold text-yellow-400">52</div>
+                <div class="text-slate-400 text-sm">sentiment score</div>
+            </div>
+        </div>
+
+        <!-- Summary Card -->
+        <div class="bg-gradient-to-r from-slate-800 to-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700">
+            <h2 class="text-2xl font-bold mb-3">HP Keyboard PC Sparks Nostalgia Amid Ongoing Ink Controversy</h2>
+            <p class="text-slate-300 text-lg">HP's CES 2026 keyboard PC announcement generates buzz with Commodore 64 comparisons, while persistent ink cartridge pricing complaints and HPE security vulnerabilities dampen overall sentiment.</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="flex gap-2 mb-8 border-b border-slate-700 pb-3">
+            <button onclick="showTab('overview')" id="tab-overview" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/50">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                Overview
+            </button>
+            <button onclick="showTab('narratives')" id="tab-narratives" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-lg text-slate-400 hover:bg-slate-800">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                Narratives
+            </button>
+            <button onclick="showTab('swot')" id="tab-swot" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-lg text-slate-400 hover:bg-slate-800">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                SWOT
+            </button>
+            <button onclick="showTab('influencers')" id="tab-influencers" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-lg text-slate-400 hover:bg-slate-800">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                Influencers
+            </button>
+            <button onclick="showTab('quotes')" id="tab-quotes" class="tab-btn flex items-center gap-2 px-5 py-3 rounded-lg text-slate-400 hover:bg-slate-800">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+                Key Quotes
+            </button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="content-overview" class="tab-content">
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Sentiment Breakdown -->
+                <div class="bg-slate-800 rounded-xl p-6">
+                    <h3 class="text-lg font-semibold text-slate-300 mb-4">Sentiment Breakdown</h3>
+                    <div class="h-56 flex items-center justify-center">
+                        <canvas id="sentimentChart" width="200" height="200"></canvas>
+                    </div>
+                    <div class="flex justify-center gap-6 mt-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                            <span class="text-slate-400 text-sm">Positive 32%</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 rounded-full bg-gray-500"></div>
+                            <span class="text-slate-400 text-sm">Neutral 43%</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-4 h-4 rounded-full bg-red-500"></div>
+                            <span class="text-slate-400 text-sm">Negative 25%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analyst View -->
+                <div class="bg-slate-800 rounded-xl p-6">
+                    <h3 class="text-lg font-semibold text-slate-300 mb-4">Analyst View</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        HP's CES 2026 keyboard PC announcement generated significant buzz, with many users drawing nostalgic comparisons to the Commodore 64 era. Tech analyst @BenBajarin's coverage sparked widespread discussion about the product's potential.
+                    </p>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        However, sentiment remains mixed due to ongoing frustration over HP's ink cartridge pricing model, with users continuing to criticize what they perceive as "profiteering." The HPE OneView security vulnerability flagged by CISA added enterprise concerns.
+                    </p>
+                    <p class="text-slate-400 text-xs">
+                        Notable discussions from: @BenBajarin (Tech Analyst), @DarkWebInformer (Security), @ttvresearch (Market Research)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-4 gap-4 mt-6">
+                <div class="bg-slate-800 rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-indigo-400">676</div>
+                    <div class="text-slate-500 text-sm">Total Tweets</div>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-cyan-400">147</div>
+                    <div class="text-slate-500 text-sm">Unique Authors</div>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-green-400">1.1K</div>
+                    <div class="text-slate-500 text-sm">Top Tweet Likes</div>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-amber-400">$HPQ</div>
+                    <div class="text-slate-500 text-sm">Ticker Symbol</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Narratives Tab -->
+        <div id="content-narratives" class="tab-content hidden">
+            <div class="space-y-4">
+                <!-- Narrative 1 -->
+                <div class="bg-slate-800 rounded-xl p-6 flex items-start gap-4">
+                    <div class="mt-1">
+                        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white text-lg">Keyboard PC Innovation at CES</h4>
+                        <p class="text-slate-400 mt-2">HP's keyboard PC announcement at CES 2026 sparked widespread nostalgia, with users comparing it to the Commodore 64 era. @SkyeSharkie's tweet "we've come full circle back to commodores?" received 1,151 likes, indicating strong engagement with the retro computing theme.</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">positive</span>
+                            <span class="px-2 py-1 bg-slate-700 text-slate-400 text-xs rounded">CES 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Narrative 2 -->
+                <div class="bg-slate-800 rounded-xl p-6 flex items-start gap-4">
+                    <div class="mt-1">
+                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white text-lg">Ink Cartridge Pricing Controversy</h4>
+                        <p class="text-slate-400 mt-2">Ongoing frustration over HP's ink pricing model continues to surface. @Gsalvatore1 stated: "This made me hate everything HP. I was buying ink cartridges like my life depended on it not knowing it was profiteering by HP. When I found out, I sold every HP device I had."</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded">negative</span>
+                            <span class="px-2 py-1 bg-slate-700 text-slate-400 text-xs rounded">consumer trust</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Narrative 3 -->
+                <div class="bg-slate-800 rounded-xl p-6 flex items-start gap-4">
+                    <div class="mt-1">
+                        <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white text-lg">HPE Security Vulnerabilities</h4>
+                        <p class="text-slate-400 mt-2">CISA flagged critical HPE OneView vulnerabilities (CVSS 10.0) as actively exploited. @DarkWebInformer reported: "CVE-2025-37164: Hewlett Packard Enterprise OneView Code Injection Vulnerability." This raised enterprise security concerns across the tech community.</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded">negative</span>
+                            <span class="px-2 py-1 bg-slate-700 text-slate-400 text-xs rounded">security</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Narrative 4 -->
+                <div class="bg-slate-800 rounded-xl p-6 flex items-start gap-4">
+                    <div class="mt-1">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white text-lg">Sports Sponsorship Visibility</h4>
+                        <p class="text-slate-400 mt-2">HP's sponsorships with Real Madrid (48M followers) and Scuderia Ferrari HP continue to generate brand visibility. Multiple retweets of @realmadrid content featuring HP branding reached hundreds of thousands of impressions during the week.</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="px-2 py-1 bg-gray-500/20 text-gray-400 text-xs rounded">neutral</span>
+                            <span class="px-2 py-1 bg-slate-700 text-slate-400 text-xs rounded">sponsorship</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Narrative 5 -->
+                <div class="bg-slate-800 rounded-xl p-6 flex items-start gap-4">
+                    <div class="mt-1">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle></svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white text-lg">Laptop Market Position</h4>
+                        <p class="text-slate-400 mt-2">General discussion around HP laptops shows mixed reception. @_DeejustDee noted "I think HP is the most widely used laptop" while others compare HP devices unfavorably to competitors. The brand maintains market presence but faces perception challenges.</p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="px-2 py-1 bg-gray-500/20 text-gray-400 text-xs rounded">neutral</span>
+                            <span class="px-2 py-1 bg-slate-700 text-slate-400 text-xs rounded">market position</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SWOT Tab -->
+        <div id="content-swot" class="tab-content hidden">
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Strengths -->
+                <div class="bg-green-500/10 rounded-xl p-6 border border-green-500/20">
+                    <h4 class="font-semibold text-green-400 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        Strengths
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            Strong brand recognition - "most widely used laptop" perception
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            High-profile sponsorships (Real Madrid, Ferrari F1)
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            Innovation narrative with keyboard PC product
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            CES 2026 presence generating tech community buzz
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Weaknesses -->
+                <div class="bg-red-500/10 rounded-xl p-6 border border-red-500/20">
+                    <h4 class="font-semibold text-red-400 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Weaknesses
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-red-400">✗</span>
+                            Persistent ink cartridge pricing backlash
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-red-400">✗</span>
+                            "Profiteering" perception damaging trust
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-red-400">✗</span>
+                            HPE security vulnerabilities (CVSS 10.0)
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-red-400">✗</span>
+                            Users actively abandoning HP ecosystem
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Opportunities -->
+                <div class="bg-blue-500/10 rounded-xl p-6 border border-blue-500/20">
+                    <h4 class="font-semibold text-blue-400 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        Opportunities
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-blue-400">→</span>
+                            Capitalize on keyboard PC nostalgia marketing
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-blue-400">→</span>
+                            Address ink pricing with transparent alternative plans
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-blue-400">→</span>
+                            Leverage sports sponsorship for brand rehabilitation
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-blue-400">→</span>
+                            AI computing partnership potential ($QCOM, $MSFT at CES)
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Threats -->
+                <div class="bg-amber-500/10 rounded-xl p-6 border border-amber-500/20">
+                    <h4 class="font-semibold text-amber-400 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        Threats
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-amber-400">⚠</span>
+                            Ongoing security vulnerability exposure (CISA warnings)
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-amber-400">⚠</span>
+                            Consumer boycotts over ink pricing practices
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-amber-400">⚠</span>
+                            Competition from Dell, Lenovo in PC market
+                        </li>
+                        <li class="text-slate-300 text-sm flex items-start gap-2">
+                            <span class="text-amber-400">⚠</span>
+                            Negative sentiment spreading on social media
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Influencers Tab -->
+        <div id="content-influencers" class="tab-content hidden">
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Influencer 1 -->
+                <div class="bg-slate-800 rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <span class="font-semibold text-white">Real Madrid C.F.</span>
+                            <p class="text-slate-500 text-sm">@realmadrid</p>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30">official</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-3">Official Real Madrid account - HP sponsor partner</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-500 text-sm">48.9M followers</span>
+                        <span class="text-xs px-2 py-1 rounded bg-gray-500/20 text-gray-400">neutral</span>
+                    </div>
+                </div>
+
+                <!-- Influencer 2 -->
+                <div class="bg-slate-800 rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <span class="font-semibold text-white">Grok</span>
+                            <p class="text-slate-500 text-sm">@grok</p>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">AI</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-3">xAI's conversational AI - engaged in HP keyboard PC discussion</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-500 text-sm">7.5M followers</span>
+                        <span class="text-xs px-2 py-1 rounded bg-gray-500/20 text-gray-400">neutral</span>
+                    </div>
+                </div>
+
+                <!-- Influencer 3 -->
+                <div class="bg-slate-800 rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <span class="font-semibold text-white">Scuderia Ferrari HP</span>
+                            <p class="text-slate-500 text-sm">@ScuderiaFerrari</p>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30">official</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-3">F1 team with HP title sponsorship</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-500 text-sm">5.7M followers</span>
+                        <span class="text-xs px-2 py-1 rounded bg-green-500/20 text-green-400">positive</span>
+                    </div>
+                </div>
+
+                <!-- Influencer 4 -->
+                <div class="bg-slate-800 rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <span class="font-semibold text-white">HP</span>
+                            <p class="text-slate-500 text-sm">@HP</p>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30">official</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-3">HP is redefining the future of work through technology</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-500 text-sm">1.1M followers</span>
+                        <span class="text-xs px-2 py-1 rounded bg-green-500/20 text-green-400">positive</span>
+                    </div>
+                </div>
+
+                <!-- Influencer 5 -->
+                <div class="bg-slate-800 rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <span class="font-semibold text-white">DarkWebInformer</span>
+                            <p class="text-slate-500 text-sm">@DarkWebInformer</p>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">news</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-3">Cybersecurity news - reported CISA HPE vulnerability warnings</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-500 text-sm">Security Focus</span>
+                        <span class="text-xs px-2 py-1 rounded bg-red-500/20 text-red-400">negative</span>
+                    </div>
+                </div>
+
+                <!-- Influencer 6 -->
+                <div class="bg-slate-800 rounded-xl p-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <span class="font-semibold text-white">Val Gadgets</span>
+                            <p class="text-slate-500 text-sm">@Val_Gadget</p>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded bg-pink-500/20 text-pink-400 border border-pink-500/30">influencer</span>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-3">Tech gadget reviewer - "DELL IS KING" - HP skeptic</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-500 text-sm">43.4K followers</span>
+                        <span class="text-xs px-2 py-1 rounded bg-red-500/20 text-red-400">negative</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Quotes Tab -->
+        <div id="content-quotes" class="tab-content hidden">
+            <div class="space-y-4">
+                <div class="bg-slate-800 rounded-xl p-5 border-l-4 border-green-500">
+                    <p class="text-slate-300 italic">"we've come full circle back to commodores?"</p>
+                    <div class="flex items-center justify-between mt-3">
+                        <span class="text-slate-500 text-sm">@SkyeSharkie</span>
+                        <div class="flex gap-3 text-slate-500 text-sm">
+                            <span>❤️ 1,151</span>
+                            <span>🔁 13</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-5 border-l-4 border-red-500">
+                    <p class="text-slate-300 italic">"This made me hate everything HP. I was buying ink cartridges like my life depended on it not knowing it was profiteering by HP. When I found out, I sold every HP device I had and never looked back."</p>
+                    <div class="flex items-center justify-between mt-3">
+                        <span class="text-slate-500 text-sm">@Gsalvatore1</span>
+                        <div class="flex gap-3 text-slate-500 text-sm">
+                            <span>Consumer Frustration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-5 border-l-4 border-amber-500">
+                    <p class="text-slate-300 italic">"CISA adds two vulnerabilities to the KEV Catalog - CVE-2025-37164: Hewlett Packard Enterprise OneView Code Injection Vulnerability - CVSS: 10"</p>
+                    <div class="flex items-center justify-between mt-3">
+                        <span class="text-slate-500 text-sm">@DarkWebInformer</span>
+                        <div class="flex gap-3 text-slate-500 text-sm">
+                            <span>❤️ 13</span>
+                            <span>🔁 3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-5 border-l-4 border-gray-500">
+                    <p class="text-slate-300 italic">"I think HP is the most widely used laptop."</p>
+                    <div class="flex items-center justify-between mt-3">
+                        <span class="text-slate-500 text-sm">@_DeejustDee</span>
+                        <div class="flex gap-3 text-slate-500 text-sm">
+                            <span>❤️ 8</span>
+                            <span>💬 2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-5 border-l-4 border-blue-500">
+                    <p class="text-slate-300 italic">"THE FUTURE OF COMPUTING IN FIVE MINUTES! $QCOM, $ADBE, and $HPQ are all set to partake in a #CES2026 panel"</p>
+                    <div class="flex items-center justify-between mt-3">
+                        <span class="text-slate-500 text-sm">@ttvresearch</span>
+                        <div class="flex gap-3 text-slate-500 text-sm">
+                            <span>❤️ 3</span>
+                            <span>CES Panel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Note -->
+        <div class="mt-8 bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+            <h3 class="text-lg font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Methodology Note
+            </h3>
+            <div class="text-slate-400 text-sm space-y-2">
+                <p><strong class="text-slate-300">Data Collection:</strong> This report analyzed 676 tweets over a 7-day period (Jan 7-14, 2026). Data was fetched via XPOZ MCP using expanded query: "HP" OR "$HPQ" OR "Hewlett-Packard".</p>
+                <p><strong class="text-slate-300">Sentiment Analysis:</strong> Tweets were classified using a 5-level scale based on keyword analysis and contextual indicators. Note: Some noise from Spanish slang usage of "hp" was filtered where identifiable.</p>
+                <p><strong class="text-slate-300">Limitations:</strong> Analysis based on English-language Twitter/X data primarily. "HP" as a short term captures some unrelated mentions which may affect precision.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 pt-6 border-t border-slate-700 text-center">
+            <p class="text-slate-500 text-sm">
+                Powered by <a href="https://xpoz.ai" class="text-indigo-400 hover:text-indigo-300">XPOZ MCP Social Intelligence</a> — visit xpoz.ai to see how you can use it
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Sentiment Chart
+        const ctx = document.getElementById('sentimentChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Positive', 'Neutral', 'Negative'],
+                datasets: [{
+                    data: [32, 43, 25],
+                    backgroundColor: ['#22c55e', '#6b7280', '#ef4444'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '60%',
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            // Show selected content
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+
+            // Update tab styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-500/20', 'text-indigo-400', 'border', 'border-indigo-500/50');
+                btn.classList.add('text-slate-400', 'hover:bg-slate-800');
+            });
+            const activeTab = document.getElementById('tab-' + tabName);
+            activeTab.classList.remove('text-slate-400', 'hover:bg-slate-800');
+            activeTab.classList.add('bg-indigo-500/20', 'text-indigo-400', 'border', 'border-indigo-500/50');
+        }
+    </script>
+</body>
+</html>
