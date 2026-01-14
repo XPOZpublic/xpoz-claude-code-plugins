@@ -2,8 +2,8 @@
 
 ## Step 1: Set Up XPOZ (Do This First!)
 
-1. **Sign up**: Go to [xpoz.ai](https://xpoz.ai) and click **"Start Free"**
-2. **Configure keywords**: Navigate to [xpoz.ai/settings](https://www.xpoz.ai/settings)
+1. **Sign up**: Go to [xpoz.ai](https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence) and click **"Start Free"**
+2. **Configure keywords**: Navigate to [xpoz.ai/settings](https://www.xpoz.ai/settings?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
    - Add brand names you want to analyze (e.g., "Tesla", "NVIDIA")
    - Add ticker symbols (e.g., "$TSLA", "$NVDA")
    - Allow some time for XPOZ to collect posts for your keywords
@@ -37,7 +37,7 @@ Add to `~/.claude.json`:
 }
 ```
 
-Replace `YOUR_API_KEY` with the key from [xpoz.ai/settings](https://www.xpoz.ai/settings)
+Replace `YOUR_API_KEY` with the key from [xpoz.ai/settings](https://www.xpoz.ai/settings?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
 
 ## Step 4: Run Reports
 
@@ -58,7 +58,7 @@ git pull && ./install.sh
 
 ## Troubleshooting
 
-**No results?** Check your keywords at [xpoz.ai/settings](https://www.xpoz.ai/settings)
+**No results?** Check your keywords at [xpoz.ai/settings](https://www.xpoz.ai/settings?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
 
 ---
-Powered by [XPOZ](https://xpoz.ai)
+Powered by [XPOZ](https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)

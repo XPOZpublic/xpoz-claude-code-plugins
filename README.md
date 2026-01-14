@@ -1,6 +1,6 @@
 # Claude Code Brand Intelligence Skills
 
-> Powered by [XPOZ MCP Social Intelligence](https://xpoz.ai)
+> Powered by [XPOZ MCP Social Intelligence](https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
 
 ## 🔗 [View Live Examples](https://xpozpublic.github.io/xpoz-claude-code-plugins/)
 
@@ -41,8 +41,8 @@ View live examples directly in your browser:
 
 Before installing the skills, you need to configure XPOZ to collect data for your topics of interest:
 
-1. **Sign up for free** at [xpoz.ai](https://xpoz.ai) - click "Start Free"
-2. **Go to Settings**: Navigate to [xpoz.ai/settings](https://www.xpoz.ai/settings)
+1. **Sign up for free** at [xpoz.ai](https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence) - click "Start Free"
+2. **Go to Settings**: Navigate to [xpoz.ai/settings](https://www.xpoz.ai/settings?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
 3. **Define your keywords**: This is crucial! XPOZ needs to know which topics to monitor. Add keywords for:
    - Brand names you want to analyze (e.g., "Tesla", "NVIDIA", "Apple")
    - Ticker symbols (e.g., "$TSLA", "$NVDA", "$AAPL")
@@ -93,7 +93,7 @@ Add to your Claude Code MCP configuration (`~/.claude.json`):
 }
 ```
 
-Replace `YOUR_XPOZ_API_KEY` with the API key from [xpoz.ai/settings](https://www.xpoz.ai/settings).
+Replace `YOUR_XPOZ_API_KEY` with the API key from [xpoz.ai/settings](https://www.xpoz.ai/settings?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence).
 
 3. **Verify installation:**
 
@@ -175,7 +175,7 @@ Default: Last 7 days. The skills use the current date to calculate the date rang
 ### "No results found"
 
 This usually means XPOZ hasn't collected data for your keywords yet:
-1. Go to [xpoz.ai/settings](https://www.xpoz.ai/settings)
+1. Go to [xpoz.ai/settings](https://www.xpoz.ai/settings?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
 2. Verify your keywords are configured correctly
 3. Allow time for data collection (new keywords may take a few hours to start populating)
 
@@ -193,7 +193,7 @@ claude mcp list
 The XPOZ API uses async operations. If a query times out:
 1. Try a more specific query
 2. Reduce the date range
-3. Check your API key is valid at [xpoz.ai/settings](https://www.xpoz.ai/settings)
+3. Check your API key is valid at [xpoz.ai/settings](https://www.xpoz.ai/settings?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
 
 ## API Reference
 
@@ -211,7 +211,7 @@ The XPOZ API uses async operations. If a query times out:
 - **Pro**: $20/month for 1M results
 - **Max**: $200/month for 10M results
 
-See [xpoz.ai](https://xpoz.ai) for current pricing.
+See [xpoz.ai](https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence) for current pricing.
 
 ## License
 
@@ -219,9 +219,9 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Support
 
-- **XPOZ Settings**: [xpoz.ai/settings](https://www.xpoz.ai/settings)
+- **XPOZ Settings**: [xpoz.ai/settings](https://www.xpoz.ai/settings?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
 - **Issues**: [GitHub Issues](https://github.com/XPOZpublic/xpoz-claude-code-plugins/issues)
 
 ---
 
-**Powered by [XPOZ MCP Social Intelligence](https://xpoz.ai)** - Real-time social data for AI applications.
+**Powered by [XPOZ MCP Social Intelligence](https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)** - Real-time social data for AI applications.
