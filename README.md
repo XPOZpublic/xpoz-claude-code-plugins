@@ -25,13 +25,13 @@ Transform Claude Code into a powerful brand intelligence platform. Analyze socia
 
 ## Example Reports
 
-See live examples in the [examples/](examples/) folder:
+View live examples directly in your browser:
 
-| Report | Description |
-|--------|-------------|
-| [Tesla Brand Snapshot](examples/Tesla-snapshot-report.html) | Sentiment analysis, narratives, SWOT, influencers |
-| [Tesla Competition](examples/Tesla-competition-report.html) | Tesla vs Rivian, BYD, Lucid - share of voice, positioning |
-| [Tesla Influencers](examples/Tesla-influencers-report.html) | Influencer discovery, partnership opportunities |
+| Report | View | Description |
+|--------|------|-------------|
+| Tesla Brand Snapshot | [Live Preview](https://xpozpublic.github.io/xpoz-claude-code-plugins/examples/Tesla-snapshot-report.html) | Sentiment analysis, narratives, SWOT, influencers |
+| Tesla Competition | [Live Preview](https://xpozpublic.github.io/xpoz-claude-code-plugins/examples/Tesla-competition-report.html) | Tesla vs Rivian, BYD, Lucid - share of voice, positioning |
+| Tesla Influencers | [Live Preview](https://xpozpublic.github.io/xpoz-claude-code-plugins/examples/Tesla-influencers-report.html) | Influencer discovery, partnership opportunities |
 
 ## Quick Start
 
