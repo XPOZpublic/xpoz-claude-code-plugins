@@ -4,8 +4,6 @@
 
 Transform Claude Code into a powerful brand intelligence platform. Analyze social sentiment, discover influencers, and generate competitive insights using real-time Twitter/X data.
 
-![Brand Snapshot Example](examples/nvidia_brand_snapshot.html)
-
 ## Features
 
 ### 3 Specialized Skills
@@ -23,38 +21,35 @@ Transform Claude Code into a powerful brand intelligence platform. Analyze socia
 - **Narrative Extraction**: Identifies 5+ recurring themes in brand conversation
 - **SWOT Analysis**: Auto-generates strengths, weaknesses, opportunities, threats
 - **Influencer Discovery**: Classifies by tier (Mega/Macro/Micro/Nano) and voice type
-- **Analyst Consensus**: Extracts price targets and analyst opinions
 - **Beautiful Reports**: Generates standalone HTML reports with dark theme
 
 ## Quick Start
 
-### Prerequisites
+### Step 1: Set Up Your XPOZ Account (Required First!)
 
-- [Claude Code CLI](https://claude.ai/claude-code) installed
-- [XPOZ API Key](https://xpoz.ai) (sign up for free)
+Before installing the skills, you need to configure XPOZ to collect data for your topics of interest:
 
-### Installation
+1. **Sign up for free** at [xpoz.ai](https://xpoz.ai) - click "Start Free"
+2. **Go to Settings**: Navigate to [xpoz.ai/settings](https://www.xpoz.ai/settings)
+3. **Define your keywords**: This is crucial! XPOZ needs to know which topics to monitor. Add keywords for:
+   - Brand names you want to analyze (e.g., "Tesla", "NVIDIA", "Apple")
+   - Ticker symbols (e.g., "$TSLA", "$NVDA", "$AAPL")
+   - Industry terms relevant to your analysis
+4. **Get your API Key**: Scroll to the bottom of the settings page to find your API key
+
+> **Important**: XPOZ collects social posts based on your defined keywords. If you don't configure keywords for a topic, there won't be data available for analysis. Set up your keywords first, then allow some time for data collection before running reports.
+
+### Step 2: Install the Skills
 
 #### Option 1: Clone Repository (Recommended)
 
 ```bash
-git clone https://github.com/hossenco/claude-skills-automation.git
-cd claude-skills-automation
+git clone https://github.com/XPOZpublic/xpoz-claude-code-plugins.git
+cd xpoz-claude-code-plugins
 ./install.sh
 ```
 
-#### Option 2: From Zip File
-
-1. Download the zip from [GitHub Releases](https://github.com/hossenco/claude-skills-automation/releases)
-2. Extract and run:
-
-```bash
-unzip claude-skills-automation.zip
-cd claude-skills-automation
-./install.sh
-```
-
-#### Option 3: Manual Install
+#### Option 2: Manual Install
 
 1. **Copy skills to Claude Code:**
 
@@ -70,7 +65,7 @@ cp -r skills/brand-influencers ~/.claude/skills/
 
 2. **Configure XPOZ MCP Server:**
 
-Add to your Claude Code MCP configuration (`~/.claude.json` or via Claude Code settings):
+Add to your Claude Code MCP configuration (`~/.claude.json`):
 
 ```json
 {
@@ -86,7 +81,7 @@ Add to your Claude Code MCP configuration (`~/.claude.json` or via Claude Code s
 }
 ```
 
-Replace `YOUR_XPOZ_API_KEY` with your actual API key from [xpoz.ai](https://xpoz.ai).
+Replace `YOUR_XPOZ_API_KEY` with the API key from [xpoz.ai/settings](https://www.xpoz.ai/settings).
 
 3. **Verify installation:**
 
@@ -115,7 +110,6 @@ Comprehensive single-brand analysis:
 - 5 key narratives with sentiment indicators
 - SWOT analysis
 - Top influencers with voice type classification
-- Analyst consensus with price targets
 - Key quotes from Twitter
 
 ### Brand Competition
@@ -147,12 +141,6 @@ Discover partnership opportunities:
 - Rising stars detection
 - Critical voices monitoring
 
-## Example Output
-
-See the [examples](examples/) folder for sample HTML reports:
-
-- [NVIDIA Brand Snapshot](examples/nvidia_brand_snapshot.html)
-
 ## Configuration Options
 
 ### Query Expansion
@@ -170,15 +158,14 @@ The skills automatically expand brand names to include ticker symbols:
 
 Default: Last 7 days. The skills use the current date to calculate the date range automatically.
 
-### Minimum Data Requirements
-
-| Skill | Tweets | Influencers |
-|-------|--------|-------------|
-| Brand Snapshot | 200+ | 50+ |
-| Brand Competition | 100+ per company | 30+ |
-| Brand Influencers | 100+ | 200+ |
-
 ## Troubleshooting
+
+### "No results found"
+
+This usually means XPOZ hasn't collected data for your keywords yet:
+1. Go to [xpoz.ai/settings](https://www.xpoz.ai/settings)
+2. Verify your keywords are configured correctly
+3. Allow time for data collection (new keywords may take a few hours to start populating)
 
 ### "MCP server not found"
 
@@ -194,13 +181,7 @@ claude mcp list
 The XPOZ API uses async operations. If a query times out:
 1. Try a more specific query
 2. Reduce the date range
-3. Check your API key is valid
-
-### "No results found"
-
-- Verify the brand name is spelled correctly
-- Try including the ticker symbol manually
-- Check if the brand has significant Twitter presence
+3. Check your API key is valid at [xpoz.ai/settings](https://www.xpoz.ai/settings)
 
 ## API Reference
 
@@ -212,13 +193,13 @@ The XPOZ API uses async operations. If a query times out:
 | `getTwitterUsersByKeywords` | Fetch users discussing brand |
 | `checkOperationStatus` | Poll for async operation results |
 
-### Rate Limits
+### Pricing
 
-Check your XPOZ plan for rate limits at [xpoz.ai/pricing](https://xpoz.ai/pricing).
+- **Free**: 100,000 results/month
+- **Pro**: $20/month for 1M results
+- **Max**: $200/month for 10M results
 
-## Contributing
-
-Contributions welcome! Please read our [Contributing Guide](CONTRIBUTING.md) first.
+See [xpoz.ai](https://xpoz.ai) for current pricing.
 
 ## License
 
@@ -226,9 +207,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Support
 
-- **Documentation**: [xpoz.ai/docs](https://xpoz.ai/docs)
-- **Issues**: [GitHub Issues](https://github.com/hossenco/claude-skills-automation/issues)
-- **Discord**: [Join our community](https://discord.gg/xpoz)
+- **XPOZ Settings**: [xpoz.ai/settings](https://www.xpoz.ai/settings)
+- **Issues**: [GitHub Issues](https://github.com/XPOZpublic/xpoz-claude-code-plugins/issues)
 
 ---
 
