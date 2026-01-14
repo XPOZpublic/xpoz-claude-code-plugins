@@ -67,10 +67,12 @@ Follow the same async polling pattern.
 
 From the fetched tweets:
 
-**Sentiment Classification:**
-- **Bullish/Positive**: "buy", "long", "bullish", "great", "amazing", positive emojis
-- **Bearish/Negative**: "sell", "short", "bearish", "terrible", "avoid", negative emojis
-- **Neutral**: questions, factual statements, news without opinion
+**Sentiment Classification (5-Level):**
+- **positive**: Strong bullish signals - "buy", "long", "bullish", "amazing", "love", highly positive emojis (🚀🔥💪)
+- **leaning_positive**: Generally favorable but measured - "looking good", "solid", "promising", cautious optimism
+- **neutral**: Questions, factual statements, news without opinion, balanced takes
+- **leaning_negative**: Concerns expressed but not hostile - "worried about", "not sure", "some issues", cautious skepticism
+- **negative**: Strong bearish signals - "sell", "short", "bearish", "terrible", "avoid", negative emojis (📉💀)
 
 **Narrative Extraction:**
 Identify 5+ recurring themes/narratives from the tweets:
@@ -82,7 +84,7 @@ Identify 5+ recurring themes/narratives from the tweets:
 - Controversies/concerns
 
 **Influencer Classification:**
-- **Voice Type**: analyst, trader, news, official, influencer, researcher
+- **Voice Type**: analyst, trader, news, official, influencer, researcher, founder, interviewer, community
 - **Sentiment**: positive, leaning_positive, neutral, leaning_negative, negative
 
 ## Output Requirements

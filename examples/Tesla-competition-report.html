@@ -75,17 +75,17 @@
                 Volume of Mentions (7 Days)
             </h3>
             <div class="h-64">
-                <canvas id="volumeChart"></canvas>
+                <canvas id="volumeChart" role="img" aria-label="Volume of mentions: Tesla 14,603, Lucid 1,306, BYD 1,289, Rivian 539"></canvas>
             </div>
         </div>
 
         <!-- Share of Voice & Sentiment Comparison -->
-        <div class="grid grid-cols-2 gap-8 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <!-- Share of Voice -->
             <div class="bg-slate-800 rounded-xl p-6">
                 <h3 class="text-lg font-semibold text-white mb-6">Share of Voice</h3>
                 <div class="h-56 flex items-center justify-center">
-                    <canvas id="sovChart"></canvas>
+                    <canvas id="sovChart" role="img" aria-label="Share of voice: Tesla 84%, Rivian 7.5%, Lucid 5%, BYD 3.5%"></canvas>
                 </div>
                 <div class="flex justify-center gap-4 mt-4 flex-wrap">
                     <div class="flex items-center gap-2">
@@ -550,7 +550,7 @@
         <!-- Competitive Insights - IMPROVED with non-trivial content -->
         <h3 class="text-xl font-bold text-white mb-4">Competitive Insights</h3>
         <div class="bg-gradient-to-r from-slate-800 to-slate-800/50 rounded-xl p-6 mb-8 border border-slate-700">
-            <div class="grid grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="text-center">
                     <p class="text-slate-400 text-sm mb-2">Highest Competitor Sentiment</p>
                     <p class="text-2xl font-bold text-amber-400">Rivian</p>

@@ -79,9 +79,11 @@ Use getTwitterUsersByKeywords with:
 company_share = company_tweets / total_tweets * 100
 ```
 
-**Sentiment Comparison:**
-- Calculate sentiment score (0-100) for each company
-- Compare positive/negative percentages
+**Sentiment Comparison (5-Level Scale):**
+- Classify tweets using 5-level scale: positive, leaning_positive, neutral, leaning_negative, negative
+- Calculate sentiment score (0-100) for each company using weighted formula
+- Compare percentage breakdown across all 5 sentiment levels
+- Higher weight for positive content, penalty for negative mentions
 
 **Competitive Positioning:**
 - Identify strengths/weaknesses for each

@@ -75,6 +75,9 @@ Use getTwitterPostsByKeywords with:
 | official | brand account, verified brand |
 | researcher | PhD, professor, research institution |
 | influencer | creator, content, social media focus |
+| founder | CEO, founder, co-founder, startup founder |
+| interviewer | podcast host, show host, media interviewer |
+| community | fan accounts, community managers, enthusiast groups |
 
 **Sentiment Classification:**
 - **positive**: Bullish, supportive, enthusiastic language
@@ -443,6 +446,9 @@ export default function BrandInfluencers() {
 - **official**: Brand account, corporate account, verified brand
 - **researcher**: PhD, professor, academic institution
 - **influencer**: "creator", "content", large following without other signals
+- **founder**: Bio contains "CEO", "founder", "co-founder", startup references
+- **interviewer**: Bio contains "host", "podcast", "interviewer", media show references
+- **community**: Fan accounts, community managers, enthusiast groups, unofficial fan pages
 
 ### Data Collection Steps
 
