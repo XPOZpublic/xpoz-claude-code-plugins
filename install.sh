@@ -79,7 +79,7 @@ if [ -f "$CLAUDE_CONFIG" ]; then
         echo '    }'
         echo '  }'
         echo ""
-        echo "Get your API key at: https://xpoz.ai"
+        echo "Get your API key at: https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=installer&utm_campaign=brand-intelligence"
     fi
 else
     echo -e "${YELLOW}!${NC} Claude Code config file not found"
@@ -103,12 +103,12 @@ for skill in "${SKILLS[@]}"; do
 done
 echo ""
 echo "Next steps:"
-echo "  1. Get your XPOZ API key at https://xpoz.ai"
+echo "  1. Get your XPOZ API key at https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=installer&utm_campaign=brand-intelligence"
 echo "  2. Configure XPOZ MCP in Claude Code (see README.md)"
 echo "  3. Run: /brand-snapshot NVIDIA"
 echo ""
-echo "Documentation: https://xpoz.ai/docs"
-echo "Support: https://github.com/hossenco/claude-skills-automation/issues"
+echo "Documentation: https://github.com/XPOZpublic/xpoz-claude-code-plugins#readme"
+echo "Support: https://github.com/XPOZpublic/xpoz-claude-code-plugins/issues"
 echo ""
 echo -e "${BLUE}Powered by XPOZ MCP Social Intelligence${NC}"
 echo ""
