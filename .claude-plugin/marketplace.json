@@ -1,0 +1,14 @@
+{
+  "name": "xpoz-marketplace",
+  "owner": {
+    "name": "XPOZ",
+    "url": "https://xpoz.ai"
+  },
+  "plugins": [
+    {
+      "name": "xpoz-brand-intelligence",
+      "source": ".",
+      "description": "Brand intelligence analysis using XPOZ social data - sentiment, competition, influencer discovery"
+    }
+  ]
+}

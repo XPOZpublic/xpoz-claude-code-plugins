@@ -26,4 +26,11 @@ build/
 .env
 .env.local
 *.env
+
+# Generated data files (analysis outputs)
+*.csv
+*_report.html
+*_report.md
+
+# Keep CLAUDE.md for project config but don't track sensitive info
 CLAUDE.md
