@@ -1,6 +1,20 @@
 # Claude Code Brand Intelligence Skills
 
+[![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-6366f1?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQxIDAtOC0zLjU5LTgtOHMzLjU5LTggOC04IDggMy41OSA4IDgtMy41OSA4LTggOHoiLz48L3N2Zz4=)](https://github.com/XPOZpublic/xpoz-claude-code-plugins)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![XPOZ MCP](https://img.shields.io/badge/Powered_by-XPOZ_MCP-ff6b35?style=for-the-badge)](https://xpoz.ai)
+
 > Powered by [XPOZ MCP Social Intelligence](https://xpoz.ai?utm_source=claude-code-plugins&utm_medium=github&utm_campaign=brand-intelligence)
+
+## 🚀 Quick Install
+
+```bash
+# Add the XPOZ marketplace
+/plugin marketplace add XPOZpublic/xpoz-claude-code-plugins
+
+# Install the plugin
+/plugin install xpoz-brand-intelligence@xpoz-marketplace
+```
 
 ## 🔗 [View Live Examples](https://xpozpublic.github.io/xpoz-claude-code-plugins/)
 
